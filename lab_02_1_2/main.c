@@ -13,7 +13,7 @@ int main(void)
         c = sqrt(pow(x1 - x3, 2) + pow(y1 - y3, 2));
         p = (a + b + c) / 2;
         s = sqrt(p * (p - a) * (p - b) * (p - c));
-        if ((x1 == x2 && y1 == y2) || (x2 == x3 && y2 == y3) || (x1 == x3 && y1 == y3))
+        if ((x1 == x2 && y1 == y2) || (x2 == x3 && y2 == y3) || (x1 == x3 && y1 == y3) || a == 0 || b == 0 || c == 0 || s == 0)
         {
             printf("Input error");
             return 1;
