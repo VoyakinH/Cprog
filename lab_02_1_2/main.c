@@ -3,8 +3,9 @@
 
 int main(void)
 {
-    float x1, x2, x3, y1, y2, y3, rc, a, b, c, p, s;
-    rc = scanf("%f %f %f %f %f %f", &x1, &y1, &x2, &y2, &x3, &y3);
+    float rc, a, b, c, p, s;
+    int x1, x2, x3, y1, y2, y3;
+    rc = scanf("%d %d %d %d %d %d", &x1, &y1, &x2, &y2, &x3, &y3);
     if (rc == 6)
     {
         a = sqrt(pow(x1 - x2, 2) + pow(y1 - y2, 2));
