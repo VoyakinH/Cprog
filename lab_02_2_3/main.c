@@ -25,7 +25,7 @@ int main(void)
     float eps, s, x;
     int st;
     st = scanf("%f%f", &x, &eps);
-    if (st == 2 && x <= 1 && x >= -1 && eps < x && eps != 0)
+    if (st == 2 && x <= 1 && x >= -1 && eps < x)
     {
         float f = fun(x);
         s = 0;
