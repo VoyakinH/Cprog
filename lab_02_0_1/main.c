@@ -5,7 +5,7 @@ int main(void)
 {
     int a, n, rc;
     rc = scanf("%d %d", &a, &n);
-    if (rc == 2)
+    if (rc == 2 && n > 0)
         printf("%.6f", pow(a, n));
     else
         printf("Input error");
