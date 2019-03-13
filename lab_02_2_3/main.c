@@ -1,11 +1,13 @@
 #include <stdio.h>
 #include <math.h>
 
-float fun(float x){
+float fun(float x)
+{
     return asin(x);
 }
 
-float elem(float i, float x){
+float elem(float i, float x)
+{
     int j = 2 * i - 1;
     float ele = 1;
     for (int k = 1; k < j; k += 2)
