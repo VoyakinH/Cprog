@@ -26,7 +26,7 @@ int main(void)
     for (i = 0; i < n; i++)
         rs += scanf("%d", &array[i]);
     scanf("%c", &tmp);
-    if (rs != n || tmp != '\n')
+    if (rs != n || (tmp != '\n' && tmp != ' '))
         return 1;
     s = srar(array, n);
     if (s == 1)
