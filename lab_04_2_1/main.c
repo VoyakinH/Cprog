@@ -31,6 +31,6 @@ int main(void)
     s = srar(array, n);
     if (s == 1)
         return 1;
-    printf("%d", s);
+    printf("%d\n", s);
     return 0;
 }
