@@ -33,6 +33,6 @@ int main(void)
     s = srar(array, n);
     if (s == 1)
         return 1;
-    printf("%.6f\n", s);
+    printf("%f", s);
     return 0;
 }
