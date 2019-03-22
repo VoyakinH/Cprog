@@ -21,8 +21,6 @@ int main(void)
     float s;
     char tmp;
     scanf("%d", &n);
-    if (n < 0 || n > 10)
-        return 1;
     int array[n];
     rs = 0;
     for (i = 0; i < n; i++)
