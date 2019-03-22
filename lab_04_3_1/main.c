@@ -22,6 +22,8 @@ int main(void)
             s *= array[i];
             k++;
         }
+    if (k == 0 )
+        return 1;
     k = 1 / k;
     s = pow(s, k);
     printf("%.6f", s);
