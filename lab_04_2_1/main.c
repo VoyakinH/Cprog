@@ -1,8 +1,8 @@
 #include <stdio.h>
 
-double srar(int array[], int n)
+float srar(int array[], int n)
 {
-    double s = 0;
+    float s = 0;
     int k = 0;
     for (int i = 0; i < n; i++)
         if (array[i] < 0)
@@ -18,7 +18,7 @@ double srar(int array[], int n)
 int main(void)
 {
     int n, i, rs1, rs2, rs3;
-    double s;
+    float s;
     char tmp;
     rs2 = scanf("%d", &n);
     if (rs2 != 1 || rs2 == EOF || n > 10 || n < 0)
@@ -35,7 +35,9 @@ int main(void)
     s = srar(array, n);
     if (s == 1)
         return 1;
-    printf("%.6lf ", s);
+    for (i = 0; i < n; i++)
+        printf("%d", array[i]);
+    printf("%.6f", s);
     return 0;
 }
 
