@@ -30,12 +30,12 @@ int main(void)
     rs3 = scanf("%c", &tmp);
     if (rs3 != 1 || rs3 == EOF)
         return 1;
-    if (rs1 != n || (tmp != '\n' && tmp != ' ' && tmp != '\r'))
+    if (rs1 != n || (tmp != '\n' && tmp != '\r'))
         return 1;
     s = srar(array, n);
     if (s == 1)
         return 1;
-    printf("%lf", s);
+    printf("%.6lf ", s);
     return 0;
 }
 
