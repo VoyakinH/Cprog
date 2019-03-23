@@ -35,7 +35,7 @@ int main(void)
     s = srar(array, n);
     if (s == 1)
         return 1;
-    printf("%lf\n", s);
+    printf("%lf", s);
     return 0;
 }
 
