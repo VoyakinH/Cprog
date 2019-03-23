@@ -21,7 +21,7 @@ int main(void)
     double s;
     char tmp;
     rs2 = scanf("%d", &n);
-    if (rs2 != 1 || rs2 == EOF)
+    if (rs2 != 1 || rs2 == EOF || n > 10 || n < 0)
         return 1;
     int array[n];
     rs1 = 0;
@@ -30,7 +30,7 @@ int main(void)
     rs3 = scanf("%c", &tmp);
     if (rs3 != 1 || rs3 == EOF)
         return 1;
-    if (rs1 != n || (tmp != '\n' && tmp != '\r'))
+    if (rs1 != n)
         return 1;
     s = srar(array, n);
     if (s == 1)
