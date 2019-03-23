@@ -36,7 +36,7 @@ int main(void)
     if (s == 1)
         return 1;
     for (i = 0; i < n; i++)
-        printf("%d", array[i]);
+        printf("%d ", array[i]);
     printf("%.6f", s);
     return 0;
 }
