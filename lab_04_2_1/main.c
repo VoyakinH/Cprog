@@ -17,7 +17,7 @@ double srar(int array[], int n)
 }
 int main(void)
 {
-    int n, i, rs, k;
+    int n, i, rs;
     double s;
     char tmp;
     scanf("%d", &n);
