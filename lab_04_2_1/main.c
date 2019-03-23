@@ -17,16 +17,20 @@ double srar(int array[], int n)
 }
 int main(void)
 {
-    int n, i, rs;
+    int n, i, rs1, rs2, rs3;
     double s;
     char tmp;
-    scanf("%d", &n);
+    rs2 = scanf("%d", &n);
+    if (rs2 != 1 || rs2 == EOF)
+        return 1;
     int array[n];
-    rs = 0;
+    rs1 = 0;
     for (i = 0; i < n; i++)
-        rs += scanf("%d", &array[i]);
-    scanf("%c", &tmp);
-    if (rs != n || (tmp != '\n' && tmp != ' ' && tmp != '\r'))
+        rs1 += scanf("%d", &array[i]);
+    rs3 = scanf("%c", &tmp);
+    if (rs3 != 1 || rs3 == EOF)
+        return 1;
+    if (rs1 != n || (tmp != '\n' && tmp != ' ' && tmp != '\r'))
         return 1;
     s = srar(array, n);
     if (s == 1)
@@ -34,3 +38,4 @@ int main(void)
     printf("%lf\n", s);
     return 0;
 }
+
