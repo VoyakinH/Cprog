@@ -1,12 +1,12 @@
 #include <stdio.h>
 
-void srar(int array[], int n, int rs)
+void srar(int array[], int n, int rs2)
 {
     double s = 0;
     for (int i = 0; i < n; i++)
         if (array[i] < 0)
             s += array[i];
-    s = s / rs;
+    s = s / rs2;
     printf("%lf\n", s);
 }
 
@@ -27,6 +27,6 @@ int main(void)
     }
     if (rs1 != n || rs2 == 0)
         return 1;
-    srar(array, n, rs);
+    srar(array, n, rs2);
     return 0;
 }
