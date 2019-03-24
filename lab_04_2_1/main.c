@@ -22,9 +22,14 @@ int main(void)
         return 1;
     int array[n];
     rs1 = 0;
+    rs2 = 0;
     for (i = 0; i < n; i++)
+    {
         rs1 += scanf("%d", &array[i]);
-    if (rs1 != n)
+        if (array[i] < 0)
+            rs2++;
+    }
+    if (rs1 != n || rs2 == 0 || rs2 == EOF)
         return 1;
     srar(array, n);
     return 0;
