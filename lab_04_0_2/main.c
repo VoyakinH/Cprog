@@ -9,7 +9,7 @@ int new_array(int array[], int n)
         s += array[i];
     s /= n;
     int k = 0;
-    for (i  = 0; i < n; i++)
+    for (i = 0; i < n; i++)
         if (array[i] > s)
         {
             array1[k] = array[i];
@@ -18,7 +18,7 @@ int new_array(int array[], int n)
     if (k == 0)
         return 1;
     for (i = 0; i < k; i++)
-        printf("%d", array1[i]);
+        printf("%d ", array1[i]);
     return 0;
 }
 
@@ -32,7 +32,7 @@ int main(void)
         rs += scanf("%d", &array[i]);
     if (rs != n || rs == EOF)
         return 1;
-    j = new_array(array,  n);
+    j = new_array(array, n);
     if (j == 1)
         return 1;
     return 0;
