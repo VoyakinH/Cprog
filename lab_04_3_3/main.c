@@ -40,6 +40,10 @@ int main(void)
 {
     int n, i, kolpol, rs;
     rs = scanf("%d", &n);
+    if (n == 0)
+        return 1;
+    if (rs != 1 || rs == EOF)
+        return 1;
     int array[2 * n];
     kolpol = 0;
     for (i = 0; i < n; i++)
@@ -48,7 +52,7 @@ int main(void)
         if (array[i] > 0)
             kolpol++;
     }
-    if (kolpol == 0 || rs != n + 1)
+    if (kolpol == 0 || rs != n + 1 || rs == EOF)
         return 1;
     vstav(array, n);
     return 0;
