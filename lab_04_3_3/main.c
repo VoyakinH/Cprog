@@ -1,30 +1,30 @@
 #include <stdio.h>
 
-int swit(int j)
+int swit(int rs)
 {
-    int new = 0;
-    while (j != 0)
+    int kolpol = 0;
+    while (rs != 0)
     {
-        if (new != 0)
-            new *= 10;
-        new += j % 10;
-        j = j / 10;
+        if (kolpol != 0)
+            kolpol *= 10;
+        kolpol += rs % 10;
+        rs = rs / 10;
     }
-    return new;
+    return kolpol;
 }
 
 void vstav(int array[], int n)
 {
-    int j;
+    int rs;
     int i = 0;
     while (i < n)
     {
         if (array[i] > 0)
         {
-            for (j = n; j > i + 1; j--)
-                array[j] = array[j - 1];
-            j = array[i];
-            array [i + 1] = swit(j);
+            for (rs = n; rs > i + 1; rs--)
+                array[rs] = array[rs - 1];
+            rs = array[i];
+            array [i + 1] = swit(rs);
             n++;
             i++;
         }
