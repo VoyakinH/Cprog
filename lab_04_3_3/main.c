@@ -21,7 +21,7 @@ void vstav(int array[], int n)
     {
         if (array[i] > 0)
         {
-            for ( j = n; j > i + 1; j--)
+            for (j = n; j > i + 1; j--)
                 array[j] = array[j - 1];
             j = array[i];
             array [i + 1] = swit(j);
