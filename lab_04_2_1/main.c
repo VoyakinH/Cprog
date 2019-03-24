@@ -1,6 +1,6 @@
 #include <stdio.h>
 
-void srar(int array[], int n)
+int srar(int array[], int n)
 {
     double s = 0;
     int k = 0;
@@ -15,6 +15,7 @@ void srar(int array[], int n)
         s = s / k;
         printf("%lf", s);
     }
+    return 1;
 }
 
 int main(void)
@@ -30,7 +31,9 @@ int main(void)
         rs1 += scanf("%d", &array[i]);
     if (rs1 != n)
         return 1;
-    srar(array, n);
+    rs1 = srar(array, n);
+    if (rs1 == 1)
+        return 1;
     return 0;
 }
 
