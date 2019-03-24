@@ -31,7 +31,7 @@ int main(void)
     if (rs3 != 1 || rs3 == EOF)
         return 1;
     if (rs1 != n)
-        return 1;*/
+        return 1;
     s = srar(array, n);
     if (s == 1)
         return 1;
