@@ -18,6 +18,8 @@ int main(void)
 {
     int n, i, rs1;
     scanf("%d", &n);
+    if (n == 0)
+        return 1;
     int array[n];
     rs1 = 0;
     for (i = 0; i < n; i++)
