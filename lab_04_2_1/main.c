@@ -12,7 +12,7 @@ void srar(int array[], int n, int rs2)
 
 int main(void)
 {
-    int n, i, rs1, rs2;
+    int n, i, rs2;
     scanf("%d", &n);
     int array[n];
     rs1 = 0;
