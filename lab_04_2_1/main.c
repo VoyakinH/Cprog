@@ -7,7 +7,7 @@ void srar(int array[], int n, int rs2)
         if (array[i] < 0)
             s += array[i];
     s = s / rs2;
-    printf("%lf\n", s);
+    printf("%lf", s);
 }
 
 int main(void)
@@ -15,7 +15,6 @@ int main(void)
     int n, i, rs2;
     scanf("%d", &n);
     int array[n];
-    rs1 = 0;
     rs2 = 0;
     for (i = 0; i < n; i++)
     {
