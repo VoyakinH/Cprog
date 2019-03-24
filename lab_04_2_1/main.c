@@ -32,8 +32,6 @@ int main(void)
     if (rs1 != n)
         return 1;
     rs1 = srar(array, n);
-    if (rs1 == 1)
-        return 1;
     return 0;
 }
 
