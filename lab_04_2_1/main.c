@@ -11,7 +11,7 @@ void srar(int array[], int n)
             k++;
         }
     s = s / k;
-    printf("%lf", s);
+    printf("%lf\n", s);
 }
 
 int main(void)
@@ -19,7 +19,7 @@ int main(void)
     int n, i, rs1, rs2;
     scanf("%d", &n);
     if (n == 0)
-        return 1;
+        return 0;
     int array[n];
     rs1 = 0;
     rs2 = 0;
@@ -29,7 +29,7 @@ int main(void)
         if (array[i] < 0)
             rs2++;
     }
-    if (rs1 != n || rs2 == 0 || rs1 == EOF)
+    if (rs1 != n || rs2 == 0)
         return 1;
     srar(array, n);
     return 0;
