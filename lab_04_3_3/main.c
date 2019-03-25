@@ -6,6 +6,7 @@ void vstav(int array[], int n)
     int i = 0;
     while (i < n)
     {
+        printf("%d ",  array[i]);
         if (array[i] > 0)
         {
             for (rs = n; rs > i + 1; rs--)
@@ -19,14 +20,10 @@ void vstav(int array[], int n)
                 kolpol += rs % 10;
                 rs = rs / 10;
             }
-            array [i + 1] = kolpol;
-            n++;
-            i++;
+            printf("%d ", kolpol);
         }
         i++;
     }
-    for (i = 0; i < n; i++)
-        printf("%d ", array[i]);
     printf("\n");
     return;
 }
@@ -44,14 +41,11 @@ int main(void)
     {
         rs += scanf("%d", &array[i]);
         if (array[i] > 0)
-            kolpol++;
+            kolpol = 1;
     }
     if (kolpol == 0 || rs != n || rs == EOF)
         return 1;
-    int array1[n + kolpol];
-    for (i = 0; i < n; i++)
-        array1[i] = array[i];
-    vstav(array1, n);
+    vstav(array, n);
     return 0;
 }
 
