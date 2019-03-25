@@ -37,7 +37,7 @@ int main(void)
     scanf("%d", &n);
     if (n <= 0 || n > 10)
         return 1;
-    int array[2 * n];
+    int array[n];
     kolpol = 0;
     rs = 0;
     for (i = 0; i < n; i++)
@@ -48,7 +48,10 @@ int main(void)
     }
     if (kolpol == 0 || rs != n || rs == EOF)
         return 1;
-    vstav(array, n);
+    int array1[n + kolpol];
+    for (i = 0; i < n; i++)
+        array1[i] = array[i];
+    vstav(array1, n);
     return 0;
 }
 
