@@ -10,7 +10,8 @@ void vstav(int array[], int n)
         {
             for (rs = n; rs > i + 1; rs--)
                 array[rs] = array[rs - 1];
-            arrat[i] = 0;
+            array[i] = 0;
+            kolpol = 0;
             while (rs != 0)
             {
                 if (array[i] != 0)
