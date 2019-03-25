@@ -47,7 +47,7 @@ int main()
             sdvig(array, n, i);
             i++;
             reverse(array, i);
-            printf("\n");
+            printf(" ");
             n++;
         }
         i++;
