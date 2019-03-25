@@ -42,16 +42,16 @@ int main(void)
     i = 0;
     while (i < n)
     {
+        printf("%d ", array[i]);
         if (array[i] > 0)
         {
             sdvig(array, n, i);
-            n++;
             reverse(array, i);
             i++;
+            n++;
+            printf("%d ", array[i]);
         }
         i++;
     }
-    for (i = 0; i < n; i++)
-        printf("%d ", array[i]);
     return 0;
 }
