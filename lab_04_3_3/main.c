@@ -2,7 +2,7 @@
 
 void vstav(int array[], int n)
 {
-    int rs, kolpol;
+    int rs, kolpol, j;
     int i = 0;
     while (i < n)
     {
@@ -10,14 +10,14 @@ void vstav(int array[], int n)
         {
             for (rs = n; rs > i + 1; rs--)
                 array[rs] = array[rs - 1];
-            array[i] = 0;
             kolpol = 0;
-            while (array[i] != 0)
+            j = array[i];
+            while (j != 0)
             {
                 if (kolpol != 0)
                     kolpol *= 10;
-                kolpol += array[i] % 10;
-                array[i] = array[i] / 10;
+                kolpol += j % 10;
+                j = j / 10;
             }
             array[i + 1] = kolpol;
             n++;
