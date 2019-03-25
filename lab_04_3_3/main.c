@@ -39,20 +39,19 @@ void vstav(int array[], int n)
 int main(void)
 {
     int n, i, kolpol, rs;
-    rs = scanf("%d", &n);
+    scanf("%d", &n);
     if (n == 0)
-        return 1;
-    if (rs != 1 || rs == EOF)
         return 1;
     int array[2 * n];
     kolpol = 0;
+    rs = 0;
     for (i = 0; i < n; i++)
     {
         rs += scanf("%d", &array[i]);
         if (array[i] > 0)
             kolpol++;
     }
-    if (kolpol == 0 || rs != n + 1 || rs == EOF)
+    if (kolpol == 0 || rs != n || rs == EOF)
         return 1;
     vstav(array, n);
     return 0;
