@@ -12,14 +12,14 @@ void vstav(int array[], int n)
                 array[rs] = array[rs - 1];
             array[i] = 0;
             kolpol = 0;
-            while (rs != 0)
+            while (array[i] != 0)
             {
-                if (array[i] != 0)
-                    array[i] *= 10;
+                if (kolpol != 0)
+                    kolpol *= 10;
                 kolpol += array[i] % 10;
                 array[i] = array[i] / 10;
             }
-            array [i + 1] = kolpol;
+            array[i + 1] = kolpol;
             n++;
             i++;
         }
