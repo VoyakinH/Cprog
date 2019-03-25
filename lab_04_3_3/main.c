@@ -10,7 +10,7 @@ void sdvig(int array[], int n, int i)
 void reverse(int array[], int i)
 {
     int kolpol = 0;
-    int j = array[i];
+    int j = array[i - 1];
     while (j != 0)
     {
         if (kolpol != 0)
@@ -18,11 +18,11 @@ void reverse(int array[], int i)
         kolpol += j % 10;
         j = j / 10;
     }
-    array[i + 1] = kolpol;
+    array[i] = kolpol;
     return;
 }
 
-int main(void)
+int main()
 {
     int n, i, kolpol, rs;
     scanf("%d", &n);
@@ -42,16 +42,17 @@ int main(void)
     i = 0;
     while (i < n)
     {
-        printf("%d ", array[i]);
         if (array[i] > 0)
         {
             sdvig(array, n, i);
-            reverse(array, i);
             i++;
+            reverse(array, i);
+            printf("");
             n++;
-            printf("%d ", array[i]);
         }
         i++;
     }
+    for (i = 0; i < n; i++)
+        printf("%d ", array[i]);
     return 0;
 }
