@@ -1,34 +1,38 @@
 #include <stdio.h>
 
-void srar(int ok, double s)
+int srar(int array[], int n)
 {
-    s = s / ok;
-    printf("%lf\n", s);
-    return;
+    int k = 0;
+    float s = 0;
+    for (int i = 0; i < n; i++)
+        if (array[i] < 0)
+        {
+            k++;
+            s += array[i];
+        }
+    if (k == 0)
+        return 1;
+    s /= k;
+    printf("%.6f", s);
+    return 0;
 }
 
 int main(void)
 {
-    int n, i, rs, ok;
+    int n, i, rs;
     double s;
     rs = scanf("%d", &n);
     if (rs != 1 || n > 10 || n <= 0)
         return 1;
     int array[n];
-    ok = 0;
     for (i = 0; i < n; i++)
     {
         rs = scanf("%d", &array[i]);
         if (rs != 1)
             return 1;
-        if (array[i] < 0)
-        {
-            ok++;
-            s += array[i];
-        }
     }
-    if (ok == 0)
+    rs = srar(array, n);
+    if (rs == 1)
         return 1;
-    srar(ok, s);
     return 0;
 }
