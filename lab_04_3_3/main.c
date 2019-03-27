@@ -1,16 +1,17 @@
 #include <stdio.h>
 
-void sdvig(int array[], int n, int i)
+void sdvig(int array[], int n, int i, int x)
 {
     for (int rs = n; rs > i + 1; rs--)
         array[rs] = array[rs - 1];
+    array[i + 1] = x;
     return;
 }
 
-void reverse(int array[], int i)
+int reverse(int array[], int i)
 {
     int kolpol = 0;
-    int j = array[i - 1];
+    int j = array[i];
     while (j != 0)
     {
         if (kolpol != 0)
@@ -18,8 +19,7 @@ void reverse(int array[], int i)
         kolpol += j % 10;
         j = j / 10;
     }
-    array[i] = kolpol;
-    return;
+    return kolpol;
 }
 
 int main()
@@ -28,7 +28,7 @@ int main()
     rs = scanf("%d", &n);
     if (n <= 0 || n > 10 || rs != 1)
         return 1;
-    int array[n];
+    int array[2 * n];
     kolpol = 0;
     rs = 0;
     for (i = 0; i < n; i++)
@@ -46,17 +46,13 @@ int main()
     {
         if (array[i] > 0)
         {
-            sdvig(array, n, i);
+            sdvig(array, n, i, reverse(array, i));
             i++;
-            reverse(array, i);
-            int j = array[i];
-            array[i] = j;
             n++;
         }
         i++;
     }
     for (i = 0; i < n; i++)
         printf("%d ", array[i]);
-    printf("\n");
     return 0;
 }
