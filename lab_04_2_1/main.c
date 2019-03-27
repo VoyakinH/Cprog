@@ -20,7 +20,6 @@ int srar(int array[], int n)
 int main(void)
 {
     int n, i, rs;
-    double s;
     rs = scanf("%d", &n);
     if (rs != 1 || n > 10 || n <= 0)
         return 1;
