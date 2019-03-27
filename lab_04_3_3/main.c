@@ -25,19 +25,21 @@ void reverse(int array[], int i)
 int main()
 {
     int n, i, kolpol, rs;
-    scanf("%d", &n);
-    if (n <= 0 || n > 10)
+    rs = scanf("%d", &n);
+    if (n <= 0 || n > 10 || rs != 1)
         return 1;
     int array[n];
     kolpol = 0;
     rs = 0;
     for (i = 0; i < n; i++)
     {
-        rs += scanf("%d", &array[i]);
+        rs = scanf("%d", &array[i]);
+        if (rs != 1)
+            return 1;
         if (array[i] > 0)
             kolpol = 1;
     }
-    if (kolpol == 0 || rs != n || rs == EOF)
+    if (kolpol == 0)
         return 1;
     i = 0;
     while (i < n)
