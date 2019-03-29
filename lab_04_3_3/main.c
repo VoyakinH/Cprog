@@ -25,7 +25,7 @@ int arr_input(int n, int array[])
     }
     if (kolpol == 0)
         return -1;
-    return 1;
+    return n;
 }
 
 void sdvig(int array[], int n, int i, int x)
@@ -59,22 +59,22 @@ void arr_output(int array[], int n)
 
 int main()
 {
-    int n, i, rs;
-    int array[n * 2];
+    int i, rs;
+    int array[20];
     rs = arr_input(n_input(), array);
     if (rs == -1)
         return 1;
     i = 0;
-    while (i < n)
+    while (i < rs)
     {
         if (array[i] > 0)
         {
-            sdvig(array, n, i, reverse(array, i));
+            sdvig(array, rs, i, reverse(array, i));
             i++;
-            n++;
+            rs++;
         }
         i++;
     }
-    arr_output(array, n);
+    arr_output(array, rs);
     return 0;
 }
