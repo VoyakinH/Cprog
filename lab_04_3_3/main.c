@@ -13,6 +13,8 @@ int arr_input(int n, int array[])
 {
     int rs;
     int kolpol = 0;
+    if (n == -1)
+        return -1;
     for (int i = 0; i < n; i++)
     {
         rs = scanf("%d", &array[i]);
@@ -58,11 +60,8 @@ void arr_output(int array[], int n)
 int main()
 {
     int n, i, rs;
-    n = n_input();
-    if (n == -1)
-        return 1;
     int array[n * 2];
-    rs = arr_input(n, array);
+    rs = arr_input(n_input(), array);
     if (rs == -1)
         return 1;
     i = 0;
