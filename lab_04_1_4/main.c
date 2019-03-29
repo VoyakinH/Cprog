@@ -17,7 +17,7 @@ int arr_input(int n, int array[])
     {
         rs = scanf("%d", &array[i]);
         if (array[i] > 0)
-            kolpol++;
+            kolpol = 1;
         if (rs != 1 || rs == EOF)
             return -1;
     }
@@ -56,7 +56,7 @@ int main(void)
     n = n_input();
     if (n == -1)
         return 1;
-    int array[n * 2];
+    int array[n];
     rs = arr_input(n, array);
     if (rs == -1)
         return 1;
