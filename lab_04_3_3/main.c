@@ -13,8 +13,6 @@ int arr_input(int n, int array[])
 {
     int rs;
     int kolpol = 0;
-    if (n == -1)
-        return -1;
     for (int i = 0; i < n; i++)
     {
         rs = scanf("%d", &array[i]);
@@ -25,7 +23,7 @@ int arr_input(int n, int array[])
     }
     if (kolpol == 0)
         return -1;
-    return n;
+    return 1;
 }
 
 void sdvig(int array[], int n, int i, int x)
@@ -59,22 +57,24 @@ void arr_output(int array[], int n)
 
 int main()
 {
-    int i, rs;
-    int array[20];
-    rs = arr_input(n_input(), array);
-    if (rs == -1)
+    int n, i;
+    n = n_input();
+    if (n == -1)
+        return 1;
+    int array[n * 2];
+    if (arr_input(n, array) == -1)
         return 1;
     i = 0;
-    while (i < rs)
+    while (i < n)
     {
         if (array[i] > 0)
         {
-            sdvig(array, rs, i, reverse(array, i));
+            sdvig(array, n, i, reverse(array, i));
             i++;
-            rs++;
+            n++;
         }
         i++;
     }
-    arr_output(array, rs);
+    arr_output(array, n);
     return 0;
 }
