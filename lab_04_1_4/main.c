@@ -52,8 +52,7 @@ void arr_output(int array[], int n)
 
 int main(void)
 {
-    int n, rs;
-    n = n_input();
+    int n = n_input();
     if (n == -1)
         return 1;
     int array[n];
