@@ -40,7 +40,7 @@ int srar(int array[], int n)
 
 int main(void)
 {
-    int n, i, rs;
+    int n, rs;
     n = n_input();
     if (n == -1)
         return 1;
