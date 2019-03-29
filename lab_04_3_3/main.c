@@ -61,7 +61,7 @@ int main()
     n = n_input();
     if (n == -1)
         return 1;
-    int array[n];
+    int array[n * 2];
     rs = arr_input(n, array);
     if (rs == -1)
         return 1;
