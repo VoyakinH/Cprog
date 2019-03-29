@@ -36,13 +36,13 @@ int new_array(int array[], int n, int array1[])
             k++;
         }
     if (k == 0)
-        return 1;
-    return 0;
+        return -1;
+    return k;
 }
 
-void arr_output(int array1[], int n)
+void arr_output(int array1[], int k)
 {
-    for (int i = 0; i < n; i++)
+    for (int i = 0; i < k; i++)
         printf("%d ", array1[i]);
     return;
 }
@@ -58,9 +58,9 @@ int main(void)
     if (rs == -1)
         return 1;
     int array1[n];
-    rs = new_array(array, n, array1);
-    if (rs == 1)
+    int k = new_array(array, n, array1);
+    if (k == -1)
         return 1;
-    arr_output(array1, n);
+    arr_output(array1, k);
     return 0;
 }
