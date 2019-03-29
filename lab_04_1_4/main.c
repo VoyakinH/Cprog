@@ -2,8 +2,8 @@
 
 int n_input()
 {
-    int rs, n;
-    rs = scanf("%d", &n);
+    int n;
+    int rs = scanf("%d", &n);
     if (rs != 1 || n > 10 || n <= 0)
         return -1;
     return n;
@@ -16,10 +16,10 @@ int arr_input(int n, int array[])
     for (int i = 0; i < n; i++)
     {
         rs = scanf("%d", &array[i]);
-        if (array[i] > 0)
-            kolpol = 1;
         if (rs != 1 || rs == EOF)
             return -1;
+        if (array[i] > 0)
+            kolpol = 1;
     }
     if (kolpol == 0)
         return -1;
@@ -57,8 +57,7 @@ int main(void)
     if (n == -1)
         return 1;
     int array[n];
-    rs = arr_input(n, array);
-    if (rs == -1)
+    if (arr_input(n, array) == -1)
         return 1;
     sort(array, n);
     arr_output(array, n);
