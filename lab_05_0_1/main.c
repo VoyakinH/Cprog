@@ -16,7 +16,7 @@ int arr_input(int array[N][N], int n, int m)
 
 void arr_check(int array[N][N], int arr1[], int k, int n)
 {
-    int i, rs;
+    int i;
     for (i = 0; i < n; i++)
         arr1[i] = array[i][k];
     for (i = 0; i < n - 1; i++)
