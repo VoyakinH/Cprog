@@ -14,13 +14,18 @@ int arr_input(int array[N][N], int n, int m)
     return 0;
 }
 
-void arr_check(int array[N][N], int arr1[], int k, int n)
+void arr_check(int array[N][N], int arr1[], int k, int n, int m)
 {
-    int i;
+    int i, j;
+    int l = 0;
     for (i = 0; i < n; i++)
-        arr1[i] = array[i][k];
+        for (j = 0; j < m; j++)
+        {
+            arr1[l] = array[i][j];
+            l++;
+        }
     for (i = 0; i < n - 1; i++)
-        if (arr1[i] > arr1[i + 1])
+        if (array[i][k] > array[i + 1][k])
         {
             arr1[k] = 0;
             return;
@@ -29,8 +34,9 @@ void arr_check(int array[N][N], int arr1[], int k, int n)
     return;
 }
 
-void arr_print(int arr1[], int n)
+void arr_print(int arr1[], int n, int m)
 {
+    n *= m;
     for (int i = 0; i < n; i++)
         printf("%d ", arr1[i]);
     return;
@@ -46,15 +52,14 @@ int main(void)
         printf("Данные введены неверно.");
         return 1;
     }
-    k--;
     int array[N][N];
     if (arr_input(array, n, m) == 1)
     {
         printf("Данные введены неверно.");
         return 1;
     }
-    int arr1[n];
-    arr_check(array, arr1, k, n);
-    arr_print(arr1, n);
+    int arr1[n * m];
+    arr_check(array, arr1, k, n, m);
+    arr_print(arr1, n, m);
     return 0;
 }
