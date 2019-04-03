@@ -41,11 +41,12 @@ int main(void)
     int n, m, k;
     printf("Введите кол-во строк матрицы, столбцов матрицы, К: ");
     int rs = scanf("%d %d %d", &n, &m, &k);
-    if (rs != 3 || n > 10 || m > 10 || k > 10 || n <= 0 || m <= 0 || k <= 0)
+    if (rs != 3 || n > 10 || m > 10 || n <= 0 || m <= 0 || k > m || k > n || k < 1)
     {
         printf("Данные введены неверно.");
         return 1;
     }
+    k--;
     int array[N][N];
     if (arr_input(array, n, m) == 1)
     {
