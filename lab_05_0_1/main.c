@@ -1,5 +1,5 @@
 #include <stdio.h>
-#define N 100
+#define N 10
 
 int arr_input(int array[N][N], int n, int m)
 {
@@ -41,12 +41,12 @@ int main(void)
     int n, m, k;
     printf("Введите кол-во строк матрицы, столбцов матрицы, К: ");
     int rs = scanf("%d %d %d", &n, &m, &k);
-    if (rs != 3 || k > m - 1 || k > n - 1 || n > 10 || m > 10)
+    if (rs != 3 || n > 10 || m > 10 || k > 10 || n <= 0 || m <= 0 || k <= 0)
     {
         printf("Данные введены неверно.");
         return 1;
     }
-    int array[n][m];
+    int array[N][N];
     if (arr_input(array, n, m) == 1)
     {
         printf("Данные введены неверно.");
