@@ -58,17 +58,20 @@ void arr_print(int array[N][N], int n, int m)
 {
     int i, j;
     for (i = 0; i < n; i++)
+    {
         for (j = 0; j < m; j++)
             printf("%d ", array[i][j]);
+        printf("\n");
+    }
     return;
 }
 
 int main(void)
 {
-    int rs, n, m, k;
+    int rs, n, m;
     printf("Введите кол-во строк и столбцов через пробел: \n");
     rs = scanf("%d %d", &n, &m);
-    if (rs != 2 || n > 10 || m > 10 || rs == EOF || m < 2 || n < 1)
+    if (rs != 2 || n > 10 || m > 10 || rs == EOF || m < 1 || n < 1)
     {
         printf("Данные введены неверно");
         return 1;
@@ -79,9 +82,7 @@ int main(void)
         printf("Данные введены неверно");
         return 1;
     }
-    k = arr_check(array, n, m);
-    if (k == n)
-        return 1;
-    arr_print(array, k, m);
+    n = arr_check(array, n, m);
+    arr_print(array, n, m);
     return 0;
 }
