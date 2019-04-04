@@ -25,12 +25,12 @@ void arr_check(int array[N][N], int arr1[], int k, int n, int m)
             l++;
         }
     for (i = 0; i < n - 1; i++)
-        if (array[i][k] <= array[i + 1][k])
+        if (array[i][k] < array[i + 1][k])
         {
-            arr1[k] = 0;
+            arr1[k + 1] = 0;
             return;
         }
-    arr1[k] = 1;
+    arr1[k + 1] = 1;
     return;
 }
 
