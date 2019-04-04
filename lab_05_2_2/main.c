@@ -33,22 +33,13 @@ int arr_check(int array[N][N], int n, int m)
     {
         ok = 0;
         j = 0;
-        while (j < m - 1)
+        while (j < m)
         {
-            a = j + 1;
-            while (a < m)
-            {
-                if ((summ_chsl(array[i][j]) + summ_chsl(array[i][a])) % 2 == 1)
-                {
-                    j = m - 1;
-                    a = m;
-                    ok = 1;
-                }
-                a++;
-            }
+            if (summ_chsl(array[i][j]) % 2 == 1)
+                ok++;
             j++;
         }
-        if (ok == 1)
+        if (ok > 1)
         {
             n++;
             for (j = 0; j < m; j++)
