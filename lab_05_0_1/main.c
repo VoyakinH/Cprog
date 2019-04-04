@@ -27,10 +27,10 @@ void arr_check(int array[N][N], int arr1[], int k, int n, int m)
     for (i = 0; i < n - 1; i++)
         if (array[i][k] < array[i + 1][k])
         {
-            arr1[k] = 0;
+            arr1[k * (m + 1)] = 0;
             return;
         }
-    arr1[k] = 1;
+    arr1[k * (m + 1)] = 1;
     return;
 }
 
@@ -47,7 +47,7 @@ int main(void)
     int n, m, k;
     printf("Введите кол-во строк матрицы, столбцов матрицы, К: ");
     int rs = scanf("%d %d %d", &n, &m, &k);
-    if (rs != 3 || n > 10 || m > 10 || n <= 0 || m <= 0 || k > m || k > n || k < 0)
+    if (rs != 3 || n > 10 || m > 10 || n <= 0 || m <= 0 || k >= m || k >= n || k < 0)
     {
         printf("Данные введены неверно.");
         return 1;
