@@ -67,12 +67,8 @@ void arr_print(int array[N][N], int n, int m)
 {
     int i, j;
     for (i = 0; i < n; i++)
-    {
         for (j = 0; j < m; j++)
             printf("%d ", array[i][j]);
-        if (i != n - 1)
-            printf("\n");
-    }
     return;
 }
 
