@@ -27,10 +27,10 @@ void arr_check(int array[N][N], int arr1[], int k, int n, int m)
     for (i = 0; i < n - 1; i++)
         if (array[i][k - 1] < array[i + 1][k - 1])
         {
-            arr1[k - 1] = 0;
+            arr1[k] = 0;
             return;
         }
-    arr1[k - 1] = 1;
+    arr1[k] = 1;
     return;
 }
 
