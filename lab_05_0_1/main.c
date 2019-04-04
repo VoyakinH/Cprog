@@ -53,7 +53,7 @@ int main(void)
         return 1;
     }
     int array[N][N];
-    if (arr_input(array, n, m) == 1)
+    if (arr_input(array, n, m) == -1)
     {
         printf("Данные введены неверно.");
         return 1;
