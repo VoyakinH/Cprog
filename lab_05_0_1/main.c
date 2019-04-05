@@ -44,10 +44,10 @@ void arr_print(int arr1[], int n, int m)
 
 int main(void)
 {
-    int n, m, k;
-    printf("Введите кол-во строк матрицы, столбцов матрицы, К: ");
-    int rs = scanf("%d %d %d", &n, &m, &k);
-    if (rs != 3 || n > 10 || m > 10 || n <= 0 || m <= 0 || k >= m || k >= n || k < 0)
+    int n, m, k, rs;
+    printf("Введите кол-во строк матрицы, столбцов матрицы: ");
+    rs = scanf("%d %d", &n, &m);
+    if (rs != 2 || n > 10 || m > 10 || n <= 0 || m <= 0)
     {
         printf("Данные введены неверно.");
         return 1;
@@ -58,7 +58,14 @@ int main(void)
         printf("Данные введены неверно.");
         return 1;
     }
-    int arr1[n * m];
+    printf("Введите K: ");
+    rs = scanf("%d", &k);
+    if (k >= m || k >= n || k < 0 || rs != 1)
+    {
+        printf("Данные введены неверно.");
+        return 1;
+    }
+    int arr1[N * N];
     arr_check(array, arr1, k, n, m);
     arr_print(arr1, n, m);
     return 0;
