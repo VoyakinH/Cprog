@@ -58,30 +58,20 @@ void arr_print(int array[N][N], int n, int m)
 {
     int i, j;
     for (i = 0; i < n; i++)
-    {
         for (j = 0; j < m; j++)
             printf("%d ", array[i][j]);
-        printf("\n");
-    }
     return;
 }
 
 int main(void)
 {
     int rs, n, m;
-    printf("Введите кол-во строк и столбцов через пробел: \n");
     rs = scanf("%d %d", &n, &m);
     if (rs != 2 || n > 10 || m > 10 || rs == EOF || m < 1 || n < 1)
-    {
-        printf("Данные введены неверно");
         return 1;
-    }
     int array[N][N];
     if (arr_input(array, n, m) == -1)
-    {
-        printf("Данные введены неверно");
         return 1;
-    }
     n = arr_check(array, n, m);
     arr_print(array, n, m);
     return 0;
