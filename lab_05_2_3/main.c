@@ -13,7 +13,7 @@ int arr_input(int array[N][N], int n, int m)
 
 void sort(int array[N][N], int n, int m)
 {
-    int i1, i2, j, k, x1, x2, x;
+    int i1, i2, k, x1, x2, x;
     for (i1 = 0; i1 < n - 1; i1++)
     {
         x1 = 1;
@@ -49,7 +49,7 @@ void arr_print(int array[N][N], int n, int m)
 
 int main(void)
 {
-    int rs, i, j, n, m;
+    int n, m;
     if (scanf("%d %d", &n, &m) != 2 || n > 10 || m > 10 || m < 1 || n < 1)
     {
         printf("Данные введены неверно");
