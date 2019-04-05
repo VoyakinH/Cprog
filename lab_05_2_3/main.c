@@ -16,11 +16,11 @@ void sort(int array[N][N], int n, int m)
     int i1, i2, k, x1, x2, x;
     for (i1 = 0; i1 < n - 1; i1++)
     {
-        x1 = 1;
-        for (k = 0; k < m; k++)
-            x1 *= array[i1][k];
         for (i2 = i1 + 1; i2 < n; i2++)
         {
+            x1 = 1;
+            for (k = 0; k < m; k++)
+                x1 *= array[i1][k];
             x2 = 1;
             for (k = 0; k < m; k++)
                 x2 *= array[i2][k];
