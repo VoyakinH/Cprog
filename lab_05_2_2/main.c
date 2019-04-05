@@ -46,7 +46,7 @@ int arr_check(int array[N][N], int n, int m)
                 for (a = n - 1; a > i - 1; a--)
                     array[a][j] = array[a - 1][j];
             for (j = 0; j < m; j++)
-                    array[i][j] = -1;
+                array[i][j] = -1;
             i++;
         }
         i++;
