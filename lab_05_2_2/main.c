@@ -46,7 +46,12 @@ int arr_check(int array[N][N], int n, int m)
                 for (a = n - 1; a > i - 1; a--)
                     array[a][j] = array[a - 1][j];
             for (j = 0; j < m; j++)
-                array[i][j] = -1;
+            {
+                if (j == 0)
+                    array[i][j] = -1;
+                else
+                    array[i][j] = -909;
+            }
             i++;
         }
         i++;
@@ -59,7 +64,8 @@ void arr_print(int array[N][N], int n, int m)
     int i, j;
     for (i = 0; i < n; i++)
         for (j = 0; j < m; j++)
-            printf("%d ", array[i][j]);
+            if (array[i][j] != -909)
+                printf("%d ", array[i][j]);
     return;
 }
 
