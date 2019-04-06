@@ -21,7 +21,7 @@ void arr_check(int array[N][N], int arr1[N], int n, int m)
     {
         ok = 1;
         for (j = 0; j < n - 1; j++)
-            if (array[j][i] < array[j + 1][i])
+            if (array[j][i] <= array[j + 1][i])
                 ok = 0;
         if (ok == 1 && n > 1)
             arr1[i] = 1;
