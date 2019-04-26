@@ -13,7 +13,8 @@ int process(FILE *fsrc, int *k)
         return -1;
     while (1)
     {
-        fscanf(fsrc, "%d", &z);
+        if (fscanf(fsrc, "%d", &z) != 1)
+            break;
         if (y > x && y > z)
             num++;
         x = y;
