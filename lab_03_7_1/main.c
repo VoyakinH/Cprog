@@ -3,7 +3,7 @@
 #include <string.h>
 #include <errno.h>
 
-int process(FILE *fsrc, int *k)
+int process(FILE* fsrc, int *k)
 {
     int x, y, z, num;
     num = 0;
@@ -28,7 +28,7 @@ int process(FILE *fsrc, int *k)
 
 int main(void)
 {
-    FILE *fsrc;
+    FILE* fsrc;
     int k = 0;
     fsrc = fopen("f.txt", "r");
     if (!fsrc)
