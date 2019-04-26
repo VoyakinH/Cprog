@@ -3,7 +3,7 @@
 #include <string.h>
 #include <errno.h>
 
-int process(FILE *fsrc, int *k)
+int process(file *fsrc, int *k)
 {
     int x, y, z, num;
     num = 0;
@@ -28,19 +28,21 @@ int process(FILE *fsrc, int *k)
 
 int main(void)
 {
-    FILE *fsrc;
+    file *fsrc;
     int k = 0;
-    fsrc = fopen("text.txt", "r");
+    fsrc = fopen("f.txt", "r");
     if (!fsrc)
     {
-        printf("Could not open text.txt\n");
+        printf("Could not open f.txt\n");
         return -1;
     }
     if (process(fsrc, &k) == -1)
     {
-        printf("Not enough numbers in text.txt\n");
+        printf("Not enough numbers in f.txt\n");
+        fclose(fsrc);
         return -2;
     }
-    printf("%d", k);
+    printf("%d\n", k);
+    fclose(fsrc);
     return 0;
 }
