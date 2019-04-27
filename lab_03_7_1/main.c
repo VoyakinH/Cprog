@@ -5,19 +5,25 @@
 
 int process(FILE* fsrc, int *k)
 {
-    int x, y, z, num;
+    int x, y, z, num, n;
     num = 0;
     if (fscanf(fsrc, "%d", &x) != 1)
         return -1;
     if (fscanf(fsrc, "%d", &y) != 1)
         return -1;
+    n = 0;
     while (1)
     {
         if (fscanf(fsrc, "%d", &z) != 1)
+        {
+            if (n == 0)
+                return -1;
             break;
+        }
         if (y > x && y > z)
             num++;
         x = y;
+        n++;
         y = z;
         if (feof(fsrc))
             break;
