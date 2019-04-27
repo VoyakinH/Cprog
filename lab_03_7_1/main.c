@@ -28,19 +28,14 @@ int process(FILE* fsrc, int *k)
 
 int main(void)
 {
-    FILE* fsrc;
     int k = 0;
-    fsrc = fopen("f.txt", "r");
-    if (!fsrc)
-    {
-        printf("Could not open f.txt\n");
-        return -1;
-    }
+    FILE *fsrc;
+    fsrc = stdin;
     if (process(fsrc, &k) == -1)
     {
-        printf("Not enough numbers in f.txt\n");
+        printf("Not enough numbers\n");
         fclose(fsrc);
-        return -2;
+        return -1;
     }
     printf("%d\n", k);
     fclose(fsrc);
