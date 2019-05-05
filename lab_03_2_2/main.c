@@ -53,9 +53,9 @@ void disp(FILE* fsrc, int n, float m, float *d)
     return;
 }
 
-void out(float d, float m)
+void out(float d)
 {
-    printf("%f", m, d);
+    printf("%f", d);
     return;
 }
 
@@ -79,7 +79,7 @@ int main(int argc, char **argv)
                 mat_oj(fsrc, n, &m);
                 rewind(fsrc);
                 disp(fsrc, n, m, &d);
-                out(d, m);
+                out(d);
             }
             else
             {
