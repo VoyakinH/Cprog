@@ -48,13 +48,14 @@ void disp(FILE* fsrc, int n, float m, float *d)
         fscanf(fsrc, "%f", &x);
         d_buf += ((x - m) * (x - m) / (n - 1));
     }
-    *d = sqrt(d_buf);
+    d_buf = sqrt(d_buf);
+    *d = d_buf;
     return;
 }
 
 void out(float d, float m)
 {
-    printf("%.6f %.6f \n", m, d);
+    printf("%f", m, d);
     return;
 }
 
