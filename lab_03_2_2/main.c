@@ -26,35 +26,35 @@ int kol_ch(FILE* fsrc, int *n)
     return 0;
 }
 
-void mat_oj(FILE* fsrc, int n, float *M)
+void mat_oj(FILE* fsrc, int n, float *m)
 {
     float x;
-    float M_buf = 0;
+    float m_buf = 0;
     for (int i = 0; i < n; i++)
     {
         fscanf(fsrc, "%f", &x);
-        M_buf += x / n;
+        m_buf += x / n;
     }
-    *M = M_buf;
+    *m = m_buf;
     return;
 }
 
-void disp(FILE* fsrc, int n, float M, float *D)
+void disp(FILE* fsrc, int n, float m, float *d)
 {
     float x;
-    float D_buf = 0;
+    float d_buf = 0;
     for (int i = 0; i < n; i++)
     {
         fscanf(fsrc, "%f", &x);
-        D_buf += ((x - M) * (x - M) / (n - 1));
+        d_buf += ((x - m) * (x - m) / (n - 1));
     }
-    *D = sqrt(D_buf);
+    *d = sqrt(d_buf);
     return;
 }
 
-void out(float D)
+void out(float d)
 {
-    printf("%.6f", D);
+    printf("%.6f", d);
     return;
 }
 
@@ -62,8 +62,8 @@ int main(int argc, char** argv)
 {
     int n = 0;
     int rc = 0;
-    float M = 0;
-    float D = 0;
+    float m = 0;
+    float d = 0;
     FILE *fsrc;
     if (argc != 2)
         rc = -1;
@@ -75,9 +75,9 @@ int main(int argc, char** argv)
             if (kol_ch(fsrc, &n) == 0)
             {
                 rewind(fsrc);
-                mat_oj(fsrc, n, &M);
+                mat_oj(fsrc, n, &m);
                 rewind(fsrc);
-                disp(fsrc, n, M, &D);
+                disp(fsrc, n, M, &d);
                 out(D);
             }
             else
