@@ -55,7 +55,7 @@ void disp(FILE* fsrc, int n, float m, float *d)
 
 void out(float d)
 {
-    printf("%f", d);
+    printf("%.6f \n", d);
     return;
 }
 
