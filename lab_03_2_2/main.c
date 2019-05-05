@@ -52,9 +52,9 @@ void disp(FILE* fsrc, int n, float m, float *d)
     return;
 }
 
-void out(float d)
+void out(float d, float m)
 {
-    printf("%.6f", d);
+    printf("%.6f %.6f \n", m, d);
     return;
 }
 
@@ -78,7 +78,7 @@ int main(int argc, char **argv)
                 mat_oj(fsrc, n, &m);
                 rewind(fsrc);
                 disp(fsrc, n, m, &d);
-                out(d);
+                out(d, m);
             }
             else
             {
