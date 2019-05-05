@@ -58,7 +58,7 @@ void out(float d)
     return;
 }
 
-int main(int argc, char** argv)
+int main(int argc, char **argv)
 {
     int n = 0;
     int rc = 0;
@@ -77,8 +77,8 @@ int main(int argc, char** argv)
                 rewind(fsrc);
                 mat_oj(fsrc, n, &m);
                 rewind(fsrc);
-                disp(fsrc, n, M, &d);
-                out(D);
+                disp(fsrc, n, m, &d);
+                out(d);
             }
             else
             {
