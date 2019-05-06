@@ -46,9 +46,8 @@ void disp(FILE* fsrc, int n, float m, float *d)
     for (int i = 0; i < n; i++)
     {
         fscanf(fsrc, "%f", &x);
-        d_buf += ((x - m) * (x - m) / (n - 1));
+        d_buf += ((x - m) * (x - m) / n);
     }
-    d_buf = sqrt(d_buf);
     *d = d_buf;
     return;
 }
