@@ -1,8 +1,28 @@
 #include <stdio.h>
 
-int new_array(int array[], int n)
+int n_input()
 {
-    int array1[n];
+    int rs, n;
+    rs = scanf("%d", &n);
+    if (rs != 1 || n > 10 || n <= 0)
+        return -1;
+    return n;
+}
+
+int arr_input(int n, int array[])
+{
+    int rs;
+    for (int i = 0; i < n; i++)
+    {
+        rs = scanf("%d", &array[i]);
+        if (rs != 1 || rs == EOF)
+            return -1;
+    }
+    return 1;
+}
+
+int new_array(int array[], int n, int array1[])
+{
     int i;
     float s = 0;
     for (int i = 0; i < n; i++)
@@ -16,24 +36,31 @@ int new_array(int array[], int n)
             k++;
         }
     if (k == 0)
-        return 1;
-    for (i = 0; i < k; i++)
+        return -1;
+    return k;
+}
+
+void arr_output(int array1[], int k)
+{
+    for (int i = 0; i < k; i++)
         printf("%d ", array1[i]);
-    return 0;
+    return;
 }
 
 int main(void)
 {
-    int n, i, j, rs;
-    scanf("%d", &n);
+    int n, rs;
+    n = n_input();
+    if (n == -1)
+        return 1;
     int array[n];
-    rs = 0;
-    for (i = 0; i < n; i++)
-        rs += scanf("%d", &array[i]);
-    if (rs != n || rs == EOF)
+    rs = arr_input(n, array);
+    if (rs == -1)
         return 1;
-    j = new_array(array, n);
-    if (j == 1)
+    int array1[n];
+    int k = new_array(array, n, array1);
+    if (k == -1)
         return 1;
+    arr_output(array1, k);
     return 0;
 }

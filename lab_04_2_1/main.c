@@ -1,5 +1,26 @@
 #include <stdio.h>
 
+int n_input()
+{
+    int rs, n;
+    rs = scanf("%d", &n);
+    if (rs != 1 || n > 10 || n <= 0)
+        return -1;
+    return n;
+}
+
+int arr_input(int n, int array[])
+{
+    int rs;
+    for (int i = 0; i < n; i++)
+    {
+        rs = scanf("%d", &array[i]);
+        if (rs != 1 || rs == EOF)
+            return -1;
+    }
+    return 1;
+}
+
 int srar(int array[], int n)
 {
     int k = 0;
@@ -19,17 +40,14 @@ int srar(int array[], int n)
 
 int main(void)
 {
-    int n, i, rs;
-    rs = scanf("%d", &n);
-    if (rs != 1 || n > 10 || n <= 0)
+    int n, rs;
+    n = n_input();
+    if (n == -1)
         return 1;
     int array[n];
-    for (i = 0; i < n; i++)
-    {
-        rs = scanf("%d", &array[i]);
-        if (rs != 1)
-            return 1;
-    }
+    rs = arr_input(n, array);
+    if (rs == -1)
+        return 1;
     rs = srar(array, n);
     if (rs == 1)
         return 1;
