@@ -1,13 +1,12 @@
 #include <stdio.h>
 
-int n_input()
+int n_input(int *n)
 {
-    int n;
-    if (scanf("%d", &n) != 1)
+    if (scanf("%d", &*n) != 1)
         return -1;
-    if (n > 10 || n <= 0)
+    if (*n > 10 || *n <= 0)
         return -1;
-    return n;
+    return 0;
 }
 
 int arr_input(int n, int array[])
@@ -19,7 +18,7 @@ int arr_input(int n, int array[])
         if (rs != 1 || rs == EOF)
             return -1;
     }
-    return 1;
+    return 0;
 }
 
 void sdvig(int array[], int n, int i, int x)
@@ -44,33 +43,39 @@ int reverse(int array[], int i)
     return kolpol;
 }
 
+void runner(int array[], int *n)
+{
+    int i = 0;
+    while (i < *n)
+    {
+        if (array[i] > 0)
+        {
+            sdvig(array, *n, i, reverse(array, i));
+            i++;
+            *n += 1;
+        }
+        i++;
+    }
+    return;
+}
+
 void arr_output(int array[], int n)
 {
     for (int i = 0; i < n; i++)
         printf("%d ", array[i]);
+    printf("\n");
     return;
 }
 
 int main()
 {
-    int n, i;
-    n = n_input();
-    if (n == -1)
+    int n;
+    if (n_input(&n) == -1)
         return 1;
     int array[n * 2];
     if (arr_input(n, array) == -1)
         return 1;
-    i = 0;
-    while (i < n)
-    {
-        if (array[i] > 0)
-        {
-            sdvig(array, n, i, reverse(array, i));
-            i++;
-            n++;
-        }
-        i++;
-    }
+    runner(array, &n);
     arr_output(array, n);
     return 0;
 }
