@@ -43,16 +43,11 @@ int print_file(char *name)
     FILE *f;
     int number;
     size_t read;
-    int cnt_of_num;
-    int rc;
     setbuf(stdout, NULL);
     f = fopen(name, "rb");
     if (!f)
         return -1;
-    rc = fseek(f, 0, SEEK_END);
-    cnt_of_num = ftell(f) / sizeof(int);
-    fseek(f, 0, SEEK_SET);
-    for (int i = 0; i < cnt_of_num; i++)
+    while (!feof(f))
     {
         read = fread(&number, sizeof(int), 1, f);
         if (read != 1)
@@ -66,6 +61,22 @@ int print_file(char *name)
     fclose(f);
     return 0;
 }
+
+/*int get_number_by_pos()
+{
+    
+}
+
+int put_number_by_pos()
+{
+    
+}
+
+int sort_file(char *name)
+{
+    
+}
+*/
 
 int main(int argc, char **argv)
 {
@@ -86,7 +97,7 @@ int main(int argc, char **argv)
                 if (print_file(argv[2]) != 0)
                     rc = -3;
             }
-            else
+            /*else
             {
                 if (strcmp(argv[1], "s") == 0)
                 {
@@ -94,7 +105,7 @@ int main(int argc, char **argv)
                 }
                 else
                     rc = -5;
-            }
+            }*/
         }
     }
     return rc;
