@@ -52,31 +52,76 @@ int print_file(char *name)
         read = fread(&number, sizeof(int), 1, f);
         if (read != 1)
         {
+            printf("\n");
             fclose(f);
             return -2;
         }
         printf("%d ", number);
     }
-    printf("\n");
     fclose(f);
     return 0;
 }
 
-/*int get_number_by_pos()
+int get_number_by_pos(FILE **f, int pos, int *err)
 {
-    
+    int number;
+    fseek(*f, pos, SEEK_SET);
+    if (fread(&number, sizeof(int), 1, *f) != 1)
+        *err += 1;
+    return number;
 }
 
-int put_number_by_pos()
+void put_number_by_pos(FILE **f, int pos, int *err, int number)
 {
-    
+    size_t wrote;
+    fseek(*f, pos, SEEK_SET);
+    wrote = fwrite(&number, sizeof(int), 1, *f);
+    if (wrote != 1)
+        *err += 1;
+    return;
 }
 
 int sort_file(char *name)
 {
-    
+    FILE *f;
+    int err = 0;
+    int x, y, rc;
+    setbuf(stdout, NULL);
+    f = fopen(name, "rb+");
+    if (!f)
+        return -1;
+    rc = fseek(f, -sizeof(int), SEEK_END);
+    int pos = ftell(f);
+    if (rc != 0)
+    {
+        fclose(f);
+        return -2;
+    }
+    for (int i = 0; i < pos; i += sizeof(int))
+        for (int j = i + sizeof(int); j <= pos; j += sizeof(int))
+        {
+            x = get_number_by_pos(&f, i, &err);
+            y = get_number_by_pos(&f, j, &err);
+            if (err != 0)
+            {
+                fclose(f);
+                return -3;
+            }
+            if (x > y)
+            {
+                put_number_by_pos(&f, i, &err, y);
+                put_number_by_pos(&f, j, &err, x);
+                if (err != 0)
+                {
+                    fclose(f);
+                    return -4;
+                }
+            }
+            
+        }
+    return 0;
 }
-*/
+
 
 int main(int argc, char **argv)
 {
@@ -97,15 +142,16 @@ int main(int argc, char **argv)
                 if (print_file(argv[2]) != 0)
                     rc = -3;
             }
-            /*else
+            else
             {
                 if (strcmp(argv[1], "s") == 0)
                 {
-                    ///
+                    if (sort_file(argv[2]) != 0)
+                        rc = -3;
                 }
                 else
                     rc = -5;
-            }*/
+            }
         }
     }
     return rc;
