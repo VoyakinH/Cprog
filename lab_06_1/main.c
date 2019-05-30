@@ -10,7 +10,6 @@ void read_str(char *str1, char *str2)
 
 char *my_strpbrk(char *str1, char *str2)
 {
-    int x = str1[0];
     int i = 0;
     char *rc;
     int founded = 0;
@@ -41,12 +40,19 @@ char *my_strpbrk(char *str1, char *str2)
     return rc;
 }
 
+
 int main(void)
 {
-    char *rc;
+    char *actual;
+    char *expected;
     char str1[N], str2[N];
     read_str(str1, str2);
-    if (strpbrk(str1, str2) == my_strpbrk(str1, str2))
-        printf("my_strpbrk OK\n");
+    actual = my_strpbrk(str1, str2);
+    expected = strpbrk(str1, str2);
+    if (actual != expected)
+    {
+        printf("my_strpbrk : FAILED, ожидалось: %s, фактическое: %s", expected, actual);
+        return 1;
+    }
     return 0;
 }
