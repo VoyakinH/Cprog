@@ -54,7 +54,7 @@ int print_file(char *name)
         {
             printf("\n");
             fclose(f);
-            return -2;
+            return 0;
         }
         printf("%d ", number);
     }
@@ -117,7 +117,6 @@ int sort_file(char *name)
                     return -4;
                 }
             }
-            
         }
     return 0;
 }
