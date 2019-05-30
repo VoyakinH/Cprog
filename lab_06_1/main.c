@@ -2,12 +2,6 @@
 #include <string.h>
 #define N 100
 
-void read_str(char *str1, char *str2)
-{
-    gets(str1);
-    gets(str2);
-}
-
 char *my_strpbrk(char *str1, char *str2)
 {
     int i = 0;
@@ -45,8 +39,8 @@ int main(void)
 {
     char *actual;
     char *expected;
-    char str1[N], str2[N];
-    read_str(str1, str2);
+    char str1[N] = "abcd aowpf ";
+    char str2[N] = "c w";
     actual = my_strpbrk(str1, str2);
     expected = strpbrk(str1, str2);
     if (actual != expected)
