@@ -47,14 +47,16 @@ int print_file(char *name)
     f = fopen(name, "rb");
     if (!f)
         return -1;
-    while (!feof(f))
+    while (1)
     {
         read = fread(&number, sizeof(int), 1, f);
+        if (feof(f))
+            break;
         if (read != 1)
         {
             printf("\n");
             fclose(f);
-            return 0;
+            return -3;
         }
         printf("%d ", number);
     }
