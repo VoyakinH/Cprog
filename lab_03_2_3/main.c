@@ -15,7 +15,7 @@
 int create_file(char *name)
 {
     FILE *f;
-    int  r[N];
+    int r[N];
     setbuf(stdout, NULL);
     int number;
     size_t wrote;
@@ -43,7 +43,6 @@ int print_file(char *name)
     FILE *f;
     int number;
     size_t read;
-    long int pos;
     int cnt_of_num;
     int rc;
     setbuf(stdout, NULL);
