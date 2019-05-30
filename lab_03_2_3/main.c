@@ -47,6 +47,13 @@ int print_file(char *name)
     f = fopen(name, "rb");
     if (!f)
         return -1;
+    read = fread(&number, sizeof(int), 1, f);
+    if (feof(f))
+    {
+        fclose(f);
+        return -4;
+    }
+    fseek(f, 0, SEEK_SET);
     while (1)
     {
         read = fread(&number, sizeof(int), 1, f);
@@ -67,7 +74,8 @@ int print_file(char *name)
 int get_number_by_pos(FILE **f, int pos, int *err)
 {
     int number;
-    fseek(*f, pos, SEEK_SET);
+    if (fseek(*f, pos, SEEK_SET) != 0)
+        *err += 1;
     if (fread(&number, sizeof(int), 1, *f) != 1)
         *err += 1;
     return number;
@@ -76,7 +84,8 @@ int get_number_by_pos(FILE **f, int pos, int *err)
 void put_number_by_pos(FILE **f, int pos, int *err, int number)
 {
     size_t wrote;
-    fseek(*f, pos, SEEK_SET);
+    if (fseek(*f, pos, SEEK_SET) != 0)
+        *err += 1;
     wrote = fwrite(&number, sizeof(int), 1, *f);
     if (wrote != 1)
         *err += 1;
