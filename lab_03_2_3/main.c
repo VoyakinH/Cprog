@@ -27,7 +27,7 @@ int create_file(char *name)
     if (scanf("%d", &number) == 1 && number >= 0 && number <= 100)
     {
         for (int i = 0; i < number; i++)
-            r[i] = rand();
+            r[i] = rand() % 101;
         wrote = fwrite(&r, sizeof(int), number, f);
         printf("Write %s\n", wrote == number ? "OK" : "ERROR");
         fclose(f);
@@ -38,6 +38,35 @@ int create_file(char *name)
     return 0;
 }
 
+int print_file(char *name)
+{
+    FILE *f;
+    int number;
+    size_t read;
+    long int pos;
+    int cnt_of_num;
+    int rc;
+    setbuf(stdout, NULL);
+    f = fopen(name, "rb");
+    if (!f)
+        return -1;
+    rc = fseek(f, 0, SEEK_END);
+    cnt_of_num = ftell(f) / sizeof(int);
+    fseek(f, 0, SEEK_SET);
+    for (int i = 0; i < cnt_of_num; i++)
+    {
+        read = fread(&number, sizeof(int), 1, f);
+        if (read != 1)
+        {
+            fclose(f);
+            return -2;
+        }
+        printf("%d ", number);
+    }
+    printf("\n");
+    fclose(f);
+    return 0;
+}
 
 int main(int argc, char **argv)
 {
@@ -48,14 +77,15 @@ int main(int argc, char **argv)
     {
         if (strcmp(argv[1], "c") == 0)
         {
-            if(create_file(argv[2]) != 0)
+            if (create_file(argv[2]) != 0)
                 rc = -2;
         }
         else
         {
             if (strcmp(argv[1], "p") == 0)
             {
-                ///
+                if (print_file(argv[2]) != 0)
+                    rc = -3;
             }
             else
             {
