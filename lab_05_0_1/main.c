@@ -1,20 +1,25 @@
 #include <stdio.h>
 #define N 10
 
-int arr_input(int array[N][N], int n, int m)
+int size_input(int *n, int *m)
 {
-    int i, j, rs;
-    for (i = 0; i < n; i++)
-        for (j = 0; j < m; j++)
-        {
-            rs = scanf("%d", &array[i][j]);
-            if (rs != 1)
-                return -1;
-        }
+    int rs = scanf("%d %d", &*n, &*m);
+    if (rs != 2 || *n > 10 || *m > 10 || *n <= 0 || *m <= 0)
+        return -1;
     return 0;
 }
 
-void arr_check(int array[N][N], int arr1[N], int n, int m)
+int arr_input(int array[][N], int n, int m)
+{
+    int i, j;
+    for (i = 0; i < n; i++)
+        for (j = 0; j < m; j++)
+            if (scanf("%d", &array[i][j]) != 1)
+                return -1;
+    return 0;
+}
+
+void arr_check(int array[][N], int arr1[N], int n, int m)
 {
     int i, j, ok;
     for (i = 0; i < m; i++)
@@ -40,22 +45,14 @@ void arr_print(int arr1[], int m)
     return;
 }
 
-int main(void)
+int main()
 {
-    int n, m, rs;
-    printf("Введите кол-во строк матрицы, столбцов матрицы: ");
-    rs = scanf("%d %d", &n, &m);
-    if (rs != 2 || n > 10 || m > 10 || n <= 0 || m <= 0)
-    {
-        printf("Данные введены неверно.");
+    int n, m;
+    if (size_input(&n, &m) != 0)
         return 1;
-    }
     int array[N][N];
     if (arr_input(array, n, m) == -1)
-    {
-        printf("Данные введены неверно.");
         return 1;
-    }
     int arr1[N];
     arr_check(array, arr1, n, m);
     arr_print(arr1, m);
