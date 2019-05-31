@@ -91,7 +91,7 @@ unsigned long int my_strcspn(char *str31, char *str32)
     return count;
 }
 
-char *my_strchr(char *str41, int ch_4)
+char *my_strchr(const char *str41, const int ch_4)
 {
     if (ch_4 > 255 || ch_4 < 0)
         return NULL;
@@ -101,9 +101,9 @@ char *my_strchr(char *str41, int ch_4)
     {
         if (str41[i] == '\0')
             break;
-        if (str41[i] == ch_4)
+        if (str41[i] == (char)ch_4)
         {
-            rc = &str41[i];
+            rc = (char *)&str41[i];
             return rc;
         }
         i++;
@@ -112,7 +112,7 @@ char *my_strchr(char *str41, int ch_4)
     return rc;
 }
 
-char *my_strrchr(char *str51, int ch_5)
+char *my_strrchr(const char *str51, const int ch_5)
 {
     if (ch_5 > 255 || ch_5 < 0)
         return NULL;
@@ -123,9 +123,9 @@ char *my_strrchr(char *str51, int ch_5)
     {
         if (str51[i] == '\0')
             break;
-        if (str51[i] == ch_5)
+        if (str51[i] == (char)ch_5)
         {
-            rc = &str51[i];
+            rc = (char *)&str51[i];
             founded = 1;
         }
         i++;
