@@ -104,8 +104,30 @@ char *my_strchr(char *str41, int ch_4)
             rc = &str41[i];
             return rc;
         }
+        i++;
     }
     rc = NULL;
+    return rc;
+}
+
+char *my_strrchr(char *str51, int ch_5)
+{
+    char *rc;
+    int i = 0;
+    int founded = 0;
+    while (1)
+    {
+        if (str51[i] == '\0')
+            break;
+        if (str51[i] == ch_5)
+        {
+            rc = &str51[i];
+            founded = 1;
+        }
+        i++;
+    }
+    if (founded == 0)
+        rc = NULL;
     return rc;
 }
 
@@ -138,15 +160,23 @@ int main()
         printf("my_strspn : FAILED, ожидалось: %lu, фактическое: %lu", expected_3, actual_3);
         return 3;
     }
-    return 0;
     char str41[] = "01234567895";
     char ch_4 = '5';
     char *actual_4 = my_strchr(str41, ch_4);
     char *expected_4 = strchr(str41, ch_4);
     if (actual_4 != expected_4)
     {
-        printf("my_strspn : FAILED, ожидалось: %s, фактическое: %s", expected_4, actual_4);
+        printf("my_strchr : FAILED, ожидалось: %s, фактическое: %s", expected_4, actual_4);
         return 4;
+    }
+    char str51[] = "0123456789532";
+    char ch_5 = '5';
+    char *actual_5 = my_strrchr(str51, ch_5);
+    char *expected_5 = strrchr(str51, ch_5);
+    if (actual_5 != expected_5)
+    {
+        printf("my_strrchr : FAILED, ожидалось: %s, фактическое: %s", expected_5, actual_5);
+        return 5;
     }
     return 0;
 }
