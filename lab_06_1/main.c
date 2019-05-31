@@ -1,6 +1,5 @@
 #include <stdio.h>
 #include <string.h>
-#define N 100
 
 char *my_strpbrk(char *str1, char *str2)
 {
@@ -37,8 +36,8 @@ char *my_strpbrk(char *str1, char *str2)
 
 int main(void)
 {
-    char str1[N] = "abcd aowpf ";
-    char str2[N] = "c w";
+    char str1[] = "abcd aowpf ";
+    char str2[] = "c w";
     if (my_strpbrk(str1, str2) != strpbrk(str1, str2))
     {
         printf("my_strpbrk : FAILED, ожидалось: %s, фактическое: %s", strpbrk(str1, str2), my_strpbrk(str1, str2));
