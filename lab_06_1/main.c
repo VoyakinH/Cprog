@@ -11,7 +11,6 @@ char *my_strpbrk(char *str11, char *str12)
         if (str11[i] == '\0')
             break;
         int j = 0;
-        founded = 0;
         while (1)
         {
             if (str12[j] == '\0')
@@ -26,6 +25,7 @@ char *my_strpbrk(char *str11, char *str12)
         }
         if (founded == 1)
             break;
+        founded = 0;
         i++;
     }
     if (founded == 0)
@@ -37,13 +37,13 @@ unsigned long int my_strspn(char *str21, char *str22)
 {
     int i = 0;
     int j;
-    unsigned long  int count = 0;
+    unsigned long int count = 0;
     while (1)
     {
         if (str21[i] == '\0')
             break;
         j = 0;
-        while(1)
+        while (1)
         {
             if (str22[j] == '\0')
             {
@@ -62,22 +62,91 @@ unsigned long int my_strspn(char *str21, char *str22)
     return count;
 }
 
+unsigned long int my_strcspn(char *str31, char *str32)
+{
+    int i = 0;
+    int j;
+    unsigned long int count = 0;
+    while (1)
+    {
+        if (str31[i] == '\0')
+            break;
+        j = 0;
+        while (1)
+        {
+            if (str32[j] == '\0')
+            {
+                count++;
+                break;
+            }
+            if (str32[j] == str31[i])
+            {
+                return count;
+                break;
+            }
+            j++;
+        }
+        i++;
+    }
+    return count;
+}
+
+char *my_strchr(char *str41, int ch_4)
+{
+    char *rc;
+    int i = 0;
+    while (1)
+    {
+        if (str41[i] == '\0')
+            break;
+        if (str41[i] == ch_4)
+        {
+            rc = &str41[i];
+            return rc;
+        }
+    }
+    rc = NULL;
+    return rc;
+}
 
 int main()
 {
-    char str11[] = "esfoi-1 ueh .,10 ! ;";
-    char str12[] = "2wef;.!-1 ";
-    if (my_strpbrk(str11, str12) != strpbrk(str11, str12))
+    char str11[] = "abcd aowpf ";
+    char str12[] = "c w";
+    char *actual_1 = my_strpbrk(str11, str12);
+    char *expected_1 = strpbrk(str11, str12);
+    if (actual_1 != expected_1)
     {
-        printf("my_strpbrk : FAILED, ожидалось: %s, фактическое: %s", strpbrk(str11, str12), my_strpbrk(str11, str12));
+        printf("my_strpbrk : FAILED, ожидалось: %s, фактическое: %s", expected_1, actual_1);
         return 1;
     }
-    char str21[] = "20112 f-1-1p.,! tpa";
-    char str22[] = "012f -1p.,!";
-    if (my_strspn(str21, str22) != strspn(str21, str22))
+    char str21[] = "20112ef012";
+    char str22[] = "012f";
+    unsigned long int actual_2 = my_strspn(str21, str22);
+    unsigned long int expected_2 = strspn(str21, str22);
+    if (actual_2 != expected_2)
     {
-        printf("my_strspn : FAILED, ожидалось: %lu, фактическое: %lu", strspn(str21, str22), my_strspn(str21, str22));
+        printf("my_strspn : FAILED, ожидалось: %lu, фактическое: %lu", expected_2, actual_2);
         return 2;
+    }
+    char str31[] = "20112ef3012f";
+    char str32[] = "e3";
+    unsigned long int actual_3 = my_strcspn(str31, str32);
+    unsigned long int expected_3 = strcspn(str31, str32);
+    if (actual_3 != expected_3)
+    {
+        printf("my_strspn : FAILED, ожидалось: %lu, фактическое: %lu", expected_3, actual_3);
+        return 3;
+    }
+    return 0;
+    char str41[] = "01234567895";
+    char ch_4 = '5';
+    char *actual_4 = my_strchr(str41, ch_4);
+    char *expected_4 = strchr(str41, ch_4);
+    if (actual_4 != expected_4)
+    {
+        printf("my_strspn : FAILED, ожидалось: %s, фактическое: %s", expected_4, actual_4);
+        return 4;
     }
     return 0;
 }
