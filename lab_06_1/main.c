@@ -108,6 +108,8 @@ char *my_strchr(const char *str41, const int ch_4)
         }
         i++;
     }
+    if (ch_4 == 0)
+        return (char *)&str41[i];
     rc = NULL;
     return rc;
 }
@@ -130,6 +132,8 @@ char *my_strrchr(const char *str51, const int ch_5)
         }
         i++;
     }
+    if (ch_5 == 0)
+        return (char *)&str51[i];
     if (founded == 0)
         rc = NULL;
     return rc;
