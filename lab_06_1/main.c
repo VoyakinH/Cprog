@@ -91,9 +91,9 @@ unsigned long int my_strcspn(char *str31, char *str32)
     return count;
 }
 
-char *my_strchr(char *str41, int ch_4)
+const char *my_strchr(const char *str41, int ch_4)
 {
-    char *rc;
+    const char *rc;
     int i = 0;
     while (1)
     {
@@ -110,9 +110,9 @@ char *my_strchr(char *str41, int ch_4)
     return rc;
 }
 
-char *my_strrchr(char *str51, int ch_5)
+const char *my_strrchr(const char *str51, int ch_5)
 {
-    char *rc;
+    const char *rc;
     int i = 0;
     int founded = 0;
     while (1)
@@ -160,18 +160,18 @@ int main()
         printf("my_strspn : FAILED, ожидалось: %lu, фактическое: %lu", expected_3, actual_3);
         return 3;
     }
-    char str41[] = "01234567895";
+    char str41[] = "0123546789352";
     int ch_4 = '5';
-    char *actual_4 = my_strchr(str41, ch_4);
+    const char *actual_4 = my_strchr(str41, ch_4);
     char *expected_4 = strchr(str41, ch_4);
     if (actual_4 != expected_4)
     {
         printf("my_strchr : FAILED, ожидалось: %s, фактическое: %s", expected_4, actual_4);
         return 4;
     }
-    char str51[] = "0123456789532";
+    char str51[] = "0123546789352";
     int ch_5 = '5';
-    char *actual_5 = my_strrchr(str51, ch_5);
+    const char *actual_5 = my_strrchr(str51, ch_5);
     char *expected_5 = strrchr(str51, ch_5);
     if (actual_5 != expected_5)
     {
