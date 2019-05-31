@@ -161,7 +161,7 @@ int main()
         return 3;
     }
     char str41[] = "01234567895";
-    char ch_4 = '5';
+    int ch_4 = '5';
     char *actual_4 = my_strchr(str41, ch_4);
     char *expected_4 = strchr(str41, ch_4);
     if (actual_4 != expected_4)
@@ -170,7 +170,7 @@ int main()
         return 4;
     }
     char str51[] = "0123456789532";
-    char ch_5 = '5';
+    int ch_5 = '5';
     char *actual_5 = my_strrchr(str51, ch_5);
     char *expected_5 = strrchr(str51, ch_5);
     if (actual_5 != expected_5)
