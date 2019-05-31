@@ -91,9 +91,11 @@ unsigned long int my_strcspn(char *str31, char *str32)
     return count;
 }
 
-const char *my_strchr(const char *str41, int ch_4)
+char *my_strchr(char *str41, int ch_4)
 {
-    const char *rc;
+    if (ch_4 > 255 || ch_4 < 0)
+        return NULL;
+    char *rc;
     int i = 0;
     while (1)
     {
@@ -110,9 +112,11 @@ const char *my_strchr(const char *str41, int ch_4)
     return rc;
 }
 
-const char *my_strrchr(const char *str51, int ch_5)
+char *my_strrchr(char *str51, int ch_5)
 {
-    const char *rc;
+    if (ch_5 > 255 || ch_5 < 0)
+        return NULL;
+    char *rc;
     int i = 0;
     int founded = 0;
     while (1)
@@ -162,7 +166,7 @@ int main()
     }
     char str41[] = "0123546789352";
     int ch_4 = '5';
-    const char *actual_4 = my_strchr(str41, ch_4);
+    char *actual_4 = my_strchr(str41, ch_4);
     char *expected_4 = strchr(str41, ch_4);
     if (actual_4 != expected_4)
     {
@@ -171,7 +175,7 @@ int main()
     }
     char str51[] = "0123546789352";
     int ch_5 = '5';
-    const char *actual_5 = my_strrchr(str51, ch_5);
+    char *actual_5 = my_strrchr(str51, ch_5);
     char *expected_5 = strrchr(str51, ch_5);
     if (actual_5 != expected_5)
     {
