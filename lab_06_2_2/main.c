@@ -103,9 +103,17 @@ int main()
     char str1[N];
     char str2[N];
     get_str(str1, str2);
+    if (str1[strlen(str1) - 1] != '\n')
+        return -1;
+    if (str2[strlen(str2) - 1] != '\n')
+        return -2;
+    if (strlen(str1) == 1)
+        return -3;
     char str1_words[N][K];
     char str2_words[N][K];
     int n1 = split_str(str1, *str1_words);
+    if (n1 == 0)
+        return -4;
     int n2 = split_str(str2, *str2_words);
     remove_duplicates(str1_words, &n1);
     check(str1_words, str2_words, n1, n2);
