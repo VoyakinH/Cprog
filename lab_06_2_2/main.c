@@ -17,7 +17,7 @@ int split_str(char *str1, char *str1_words)
     int if_ch = 0;
     int words_i = 0;
     int el_i = 0;
-    while(str1[str1_i])
+    while (str1[str1_i])
     {
         x = str1[str1_i];
         if (x != ' ' && x != ',' && x != ';' && x != ':' && x != '-' && x != '.' && x != '!' && x != '?')

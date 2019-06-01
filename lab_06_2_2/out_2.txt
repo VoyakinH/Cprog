@@ -1,0 +1,3 @@
+Result: q1 yes
+Result: q2 yes
+Result: q3 no
