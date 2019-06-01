@@ -5,8 +5,10 @@
 
 void get_str(char *str1, char *str2)
 {
-    gets(str1);
-    gets(str2);
+    FILE *f;
+    f = stdin;
+    fgets(str1, N, f);
+    fgets(str2, N, f);
     return;
 }
 
@@ -17,7 +19,7 @@ int split_str(char *str1, char *str1_words)
     int if_ch = 0;
     int words_i = 0;
     int el_i = 0;
-    while (str1[str1_i])
+    while (str1[str1_i] != '\n')
     {
         x = str1[str1_i];
         if (x != ' ' && x != ',' && x != ';' && x != ':' && x != '-' && x != '.' && x != '!' && x != '?')
@@ -25,7 +27,7 @@ int split_str(char *str1, char *str1_words)
             str1_words[words_i * K + el_i] = x;
             el_i++;
             if_ch = 1;
-            if (str1[str1_i + 1] == '\0')
+            if (str1[str1_i + 1] == '\n')
             {
                 str1_words[words_i * K + el_i] = '\0';
                 words_i++;
