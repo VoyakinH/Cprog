@@ -15,7 +15,7 @@ void get_str(char *str1, char *str2)
 int split_str(char *str1, char *str1_words)
 {
     int str1_i = 0;
-    char x;
+    char x = 'c';
     int if_ch = 0;
     int words_i = 0;
     int el_i = 0;
@@ -79,7 +79,7 @@ void remove_duplicates(char str1_words[N][K], int *n1)
 
 void check(char str1_words[N][K], char str2_words[N][K], int n1, int n2)
 {
-    int founded;
+    int founded = 1;
     for (int i = 0; i < n1; i++)
     {
         founded = 1;
