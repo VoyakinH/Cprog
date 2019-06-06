@@ -1,24 +1,24 @@
 #include <stdio.h>
 #include <string.h>
-#define N 258
+#define N 257
 #define K 17
 
-void get_str(char *str1)
+void get_str(char* str1)
 {
-    FILE *f;
+    FILE* f;
     f = stdin;
     fgets(str1, N, f);
     return;
 }
 
-int split_str(char *str1, char *str1_words)
+int split_str(char* str1, char* str1_words)
 {
     int str1_i = 0;
     char x = 'c';
     int if_ch = 0;
     int words_i = 0;
     int el_i = 0;
-    while (str1[str1_i] != '\n')
+    while (str1[str1_i] != '\n' && str1[str1_i] != '\0')
     {
         x = str1[str1_i];
         if (x != ' ' && x != ',' && x != ';' && x != ':' && x != '-' && x != '.' && x != '!' && x != '?')
@@ -26,7 +26,7 @@ int split_str(char *str1, char *str1_words)
             str1_words[words_i * K + el_i] = x;
             el_i++;
             if_ch = 1;
-            if (str1[str1_i + 1] == '\n')
+            if (str1[str1_i + 1] == '\n' || str1[str1_i + 1] == '\0')
             {
                 str1_words[words_i * K + el_i] = '\0';
                 words_i++;
@@ -47,7 +47,7 @@ int split_str(char *str1, char *str1_words)
     return words_i;
 }
 
-void remove_duplicates(char str1_words[N][K], int *n1)
+void remove_duplicates(char str1_words[N][K], int* n1)
 {
     if (*n1 == 1)
         return;
@@ -111,7 +111,7 @@ int main()
     get_str(str1);
     if (strlen(str1) > 0)
     {
-        if (str1[strlen(str1) - 1] != '\n' && str1[strlen(str1) - 1] != '\0')
+        if (str1[strlen(str1)] != '\0')
             return -1;
     }
     else
@@ -127,7 +127,7 @@ int main()
     get_str(str2);
     if (strlen(str2) > 0)
     {
-        if (str2[strlen(str2) - 1] != '\n' && str2[strlen(str2) - 1] != '\0')
+        if (str2[strlen(str2) - 1] != '\n')
             return -4;
     }
     else
