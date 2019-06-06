@@ -106,9 +106,10 @@ void check(char str1_words[N][K], char str2_words[N][K], int n1, int n2)
 
 int main()
 {
-    char str1[N];
-    int n1, n2;
+    char str1[N] = { 0 };
     get_str(str1);
+    int n1 = 0;
+    int n2 = 0;
     int len = strlen(str1);
     if (len > 0)
     {
@@ -119,12 +120,12 @@ int main()
         return -6;
     if (len == 1)
         return -2;
-    char str1_words[N][K];
+    char str1_words[N][K] = { 0 };
     n1 = split_str(str1, str1_words);
     if (n1 == 0)
         return -3;
     remove_duplicates(str1_words, &n1);
-    char str2[N];
+    char str2[N] = { 0 };
     get_str(str2);
     len = strlen(str2);
     if (len > 0)
@@ -139,7 +140,7 @@ int main()
         print_without_check(str1_words, n1);
     else
     {
-        char str2_words[N][K];
+        char str2_words[N][K] = { 0 };
         n2 = split_str(str2, str2_words);
         if (n2 == 0)
             print_without_check(str1_words, n1);
