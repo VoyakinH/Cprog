@@ -109,8 +109,13 @@ int main()
     char str1[N];
     int n1, n2;
     get_str(str1);
-    //if (str1[strlen(str1) - 1] != '\n')
-        //return -1;
+    if (strlen(str1) > 0)
+    {
+        if (str1[strlen(str1) - 1] != '\n')
+            return -1;
+    }
+    else
+        return -6;
     if (strlen(str1) == 1)
         return -2;
     char str1_words[N][K];
@@ -120,8 +125,13 @@ int main()
     remove_duplicates(str1_words, &n1);
     char str2[N];
     get_str(str2);
-    //if (str2[strlen(str2) - 1] != '\n')
-        //return -4;
+    if (strlen(str2) > 0)
+    {
+        if (str2[strlen(str2) - 1] != '\n')
+            return -4;
+    }
+    else
+        return -5;
     if (strlen(str2) == 1)
         print_without_check(str1_words, n1);
     else
