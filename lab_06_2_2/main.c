@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <string.h>
 #define N 258
-#define K 258
+#define K 17
 
 void get_str(char *str1)
 {
@@ -111,7 +111,7 @@ int main()
     get_str(str1);
     if (strlen(str1) > 0)
     {
-        if (str1[strlen(str1) - 1] != '\n')
+        if (str1[strlen(str1) - 1] != '\n' && str1[strlen(str1) - 1] != '\0')
             return -1;
     }
     else
@@ -127,7 +127,7 @@ int main()
     get_str(str2);
     if (strlen(str2) > 0)
     {
-        if (str2[strlen(str2) - 1] != '\n')
+        if (str2[strlen(str2) - 1] != '\n' && str2[strlen(str2) - 1] != '\0')
             return -4;
     }
     else
