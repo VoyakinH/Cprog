@@ -117,7 +117,6 @@ int main()
     }
     else
         return -6;
-    len = strlen(str1);
     if (len == 1)
         return -2;
     char str1_words[N][K];
