@@ -77,6 +77,13 @@ void remove_duplicates(char str1_words[N][K], int *n1)
     return;
 }
 
+void print_without_check(char str1_words[N][K], int n1)
+{
+    for (int i = 0; i < n1; i++)
+        printf("Result: %s no\n", str1_words[i]);
+    return;
+}
+
 void check(char str1_words[N][K], char str2_words[N][K], int n1, int n2)
 {
     int founded = 1;
@@ -111,15 +118,20 @@ int main()
     if (strlen(str1) == 1)
         return -3;
     char str1_words[N][K];
-    char str2_words[N][K];
     int n1 = split_str(str1, *str1_words);
     if (n1 == 0)
+    {
+        printf("-4");
         return -4;
-    if (strlen(str2) > 1)
-        n2 = split_str(str2, *str2_words);
-    else
-        n2 = 0;
+    }
     remove_duplicates(str1_words, &n1);
-    check(str1_words, str2_words, n1, n2);
+    if (strlen(str2) <= 1)
+        print_without_check(str1_words, n1);
+    else
+    {
+        char str2_words[N][K];
+        n2 = split_str(str2, *str2_words);
+        check(str1_words, str2_words, n1, n2);
+    }
     return 0;
 }
