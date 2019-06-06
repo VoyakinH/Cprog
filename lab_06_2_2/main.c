@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <string.h>
 #define N 258
-#define K 17
+#define K 258
 
 void get_str(char *str1)
 {
