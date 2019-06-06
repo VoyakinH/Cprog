@@ -11,7 +11,7 @@ void get_str(char *str1)
     return;
 }
 
-int split_str(char *str1, char *str1_words)
+int split_str(char *str1, char str1_words[N][K])
 {
     int str1_i = 0;
     char x = 'c';
@@ -23,12 +23,12 @@ int split_str(char *str1, char *str1_words)
         x = str1[str1_i];
         if (x != ' ' && x != ',' && x != ';' && x != ':' && x != '-' && x != '.' && x != '!' && x != '?')
         {
-            str1_words[words_i * K + el_i] = x;
+            str1_words[words_i][el_i] = x;
             el_i++;
             if_ch = 1;
             if (str1[str1_i + 1] == '\n')
             {
-                str1_words[words_i * K + el_i] = '\0';
+                str1_words[words_i][el_i] = '\0';
                 words_i++;
             }
         }
@@ -36,7 +36,7 @@ int split_str(char *str1, char *str1_words)
         {
             if (if_ch)
             {
-                str1_words[words_i * K + el_i] = '\0';
+                str1_words[words_i][el_i] = '\0';
                 el_i = 0;
                 if_ch = 0;
                 words_i++;
@@ -120,7 +120,7 @@ int main()
     if (len == 1)
         return -2;
     char str1_words[N][K];
-    n1 = split_str(str1, *str1_words);
+    n1 = split_str(str1, str1_words);
     if (n1 == 0)
         return -3;
     remove_duplicates(str1_words, &n1);
@@ -140,7 +140,7 @@ int main()
     else
     {
         char str2_words[N][K];
-        n2 = split_str(str2, *str2_words);
+        n2 = split_str(str2, str2_words);
         if (n2 == 0)
             print_without_check(str1_words, n1);
         else
