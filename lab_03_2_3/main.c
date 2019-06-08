@@ -74,6 +74,7 @@ int print_file(char *name)
 int get_number_by_pos(FILE **f, int pos, int *err)
 {
     int number;
+    pos *= sizeof(int);
     if (fseek(*f, pos, SEEK_SET) != 0)
         *err += 1;
     if (fread(&number, sizeof(int), 1, *f) != 1)
@@ -84,6 +85,7 @@ int get_number_by_pos(FILE **f, int pos, int *err)
 void put_number_by_pos(FILE **f, int pos, int *err, int number)
 {
     size_t wrote;
+    pos *= sizeof(int);
     if (fseek(*f, pos, SEEK_SET) != 0)
         *err += 1;
     wrote = fwrite(&number, sizeof(int), 1, *f);
@@ -103,13 +105,14 @@ int sort_file(char *name)
         return -1;
     rc = fseek(f, -sizeof(int), SEEK_END);
     int pos = ftell(f);
+    pos /= sizeof(int);
     if (rc != 0)
     {
         fclose(f);
         return -2;
     }
-    for (int i = 0; i < pos; i += sizeof(int))
-        for (int j = i + sizeof(int); j <= pos; j += sizeof(int))
+    for (int i = 0; i < pos; i ++)
+        for (int j = i + 1; j <= pos; j ++)
         {
             x = get_number_by_pos(&f, i, &err);
             y = get_number_by_pos(&f, j, &err);
