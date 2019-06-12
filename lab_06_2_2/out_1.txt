@@ -1,0 +1,3 @@
+Result: пол yes
+Result: кол yes
+Result: стол no
