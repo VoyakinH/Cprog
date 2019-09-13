@@ -1,9 +1,9 @@
 #include <stdio.h>
 #include "func.h"
 
-int read_n_must_return_correct_result()
+int read_n_must_return_cor_res()
 {
-    int expected[4] = {13, 183, 3, 71};
+    int expected[4] = { 13, 183, 3, 71 };
     int actual, count = 0;
     int n;
     FILE *f;
@@ -29,7 +29,7 @@ int read_n_must_return_correct_result()
 int main()
 {
     int count = 0;
-    count += read_n_must_return_correct_result();
+    count += read_n_must_return_cor_res();
     printf("Test functions passed %d of 3\n", count);
     return 0;
 }

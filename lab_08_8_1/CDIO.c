@@ -1,10 +1,10 @@
 #include <stdio.h>
 #include "defines.h"
 
-int read_n(int *n)
+int read_n(FILE *f, int *n)
 {
     printf("Input n: ");
-    if (scanf("%d", n) == 1 && *n > 2)
+    if (fscanf(f, "%d", n) == 1 && *n > 2)
         return OK;
     else
         return READ_N_ERR;
