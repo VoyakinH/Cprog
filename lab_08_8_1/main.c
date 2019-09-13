@@ -11,7 +11,7 @@ int main()
         rc = READ_N_ERR;
     if (rc == OK)
     {
-        double* a = read_array(n, &rc);
+        double *a = read_array(n, &rc);
         if (rc == OK)
         {
             if (read_p(&p, n) != OK)

@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include "defines.h"
 
-double* read_array(int n, int* rc)
+double *read_array(int n, int *rc)
 {
     double *a = malloc(sizeof(double) * n);
     double *p = a;

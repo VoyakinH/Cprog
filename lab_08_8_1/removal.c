@@ -3,7 +3,7 @@
 #include <stdlib.h>
 #include <math.h>
 
-int del(double* a, int* n, double u1)
+int del(double *a, int *n, double u1)
 {
     double *k1, *k2, *p = a;
     int j;
@@ -39,7 +39,7 @@ int del(double* a, int* n, double u1)
         *p = *(p + 1);
         p++;
     }
-    *n = *n -1;
+    *n = *n - 1;
     if (k2 > k1)
         k2--;
     if (k2 > p)
@@ -56,7 +56,7 @@ int del(double* a, int* n, double u1)
         *p = *(p + 1);
         p++;
     }
-    *n = *n -1;
+    *n = *n - 1;
     a = (double*) realloc(a, *n);
     return OK;
 }
