@@ -19,9 +19,9 @@ int read_p(int *p, int n)
         return READ_P_ERR;
 }
 
-void out_arr(double* a, int n)
+void out_arr(double *a, int n)
 {
-    double* p = a;
+    double *p = a;
     for (int i = 0; i < n; i++)
     {
         printf("%.6lf ", *p);
