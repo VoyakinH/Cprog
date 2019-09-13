@@ -7,7 +7,7 @@ int main()
 {
     int rc = OK, n, p;
     double u1, u2;
-    if (read_n(&n) != OK)
+    if (read_n(stdin, &n) != OK)
         rc = READ_N_ERR;
     if (rc == OK)
     {

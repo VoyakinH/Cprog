@@ -1,6 +1,6 @@
 #include <stdio.h>
 
-int read_n(int *n);
+int read_n(FILE *f, int *n);
 double *read_array(int n, int *rc);
 void count_u1(double *a, int n, double *s);
 int del(double *a, int *n, double u1);
