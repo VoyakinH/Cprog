@@ -3,7 +3,7 @@
 
 int read_n_must_return_cor_res(FILE *f)
 {
-    int expected[5] = { 13, 183, 3, 71, 100};
+    int expected[5] = { 13, 183, 3, 71, 100 };
     int actual, count = 0;
     int n;
     for (int i = 0; i < 5; i++)
@@ -25,7 +25,7 @@ int read_n_must_return_cor_res(FILE *f)
 
 int read_p_must_return_cor_res(FILE *f)
 {
-    int expected[5] = { 0, 1, 2, 3, 4};
+    int expected[5] = { 0, 1, 2, 3, 4 };
     int actual, count = 0;
     int p = 0;
     for (int i = 0; i < 5; i++)
