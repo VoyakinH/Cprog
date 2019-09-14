@@ -14,7 +14,7 @@ int main()
         double *a = read_array(n, &rc);
         if (rc == OK)
         {
-            if (read_p(&p, n) != OK)
+            if (read_p(stdin, &p, n) != OK)
                 rc = READ_P_ERR;
             if (rc == OK)
             {
