@@ -5,7 +5,7 @@
 double *read_array(int n, int *rc)
 {
     double *a = malloc(sizeof(double) * n);
-    double *p = a;
+    double p = 0;
     if (!a)
     {
         *rc = MEM_ERR;
@@ -13,12 +13,12 @@ double *read_array(int n, int *rc)
     }
     for (int i = 0; i < n; i++)
     {
-        if (scanf("%lf", p) != 1)
+        if (scanf("%lf", &p) != 1)
         {
             *rc = READ_ARR_ERR;
             break;
         }
-        p++;
+        *(a + i) = p;
     }
     return a;
 }
