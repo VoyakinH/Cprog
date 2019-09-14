@@ -22,3 +22,19 @@ double *read_array(int n, int *rc)
     }
     return a;
 }
+
+int new_size(double **a, int n)
+{
+    double *new_a = realloc(*a, sizeof(double) * (n + 3));
+    if (new_a)
+    {
+        *a = new_a;
+        new_a = NULL;
+    }
+    else
+    {
+        free(a);
+        return MEM_ERR;
+    }
+    return OK;
+}

@@ -20,12 +20,14 @@ int main()
             {
                 count_u1(a, n, &u1);
                 del(a, &n, u1);
+                new_size(&a, n);
                 count_u2(a, n, &u2);
                 insert(a, &n, p, u2);
                 out_arr(a, n);
             }
         }
-        free(a);
+        if (a)
+            free(a);
     }
     return rc;
 }

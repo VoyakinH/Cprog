@@ -3,7 +3,6 @@
 
 void insert(double *a, int *n, int p, double u2)
 {
-    a = (double*)realloc(a, *n + 3);
     double *f = a + p;
     double *end = a;
     for (int i = 0; i < *n; i++)

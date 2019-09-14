@@ -57,6 +57,5 @@ int del(double *a, int *n, double u1)
         p++;
     }
     *n = *n - 1;
-    a = (double*) realloc(a, *n);
     return OK;
 }

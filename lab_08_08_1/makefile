@@ -1,4 +1,4 @@
-app.exe: main.o darray.o count.o CDIO.o insertion.o removal.o
+app.exe: main.o darray.o count.o CDIO.o insertion.o removal.o test.exe
 	gcc -o  app.exe main.o darray.o count.o CDIO.o insertion.o removal.o -std=c99 -Wall -Werror
 test.exe: CDIO.o test.o
 	gcc -o test.exe CDIO.o test.o -std=c99 -Wall -Werror

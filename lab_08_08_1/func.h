@@ -8,3 +8,4 @@ int read_p(int *p, int n);
 void count_u2(double *a, int n, double *u2);
 void out_arr(double *a, int n);
 void insert(double *a, int *n, int p, double u2);
+int new_size(double **a, int n);
