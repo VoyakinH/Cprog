@@ -10,15 +10,8 @@ int comp(double u1, double *p1, double *p2)
     return 0;
 }
 
-void slip(int *n, double *a, double *k)
+void slip(int *n, int j, double *p)
 {
-    double *p = a;
-    int j = 0;
-    while (p < k)
-    {
-        p++;
-        j++;
-    }
     for (int i = j; i < *n - 1; i++)
     {
         *p = *(p + 1);
@@ -30,8 +23,7 @@ void slip(int *n, double *a, double *k)
 void del(double *a, int *n, double u1)
 {
     double *k1, *k2, *p = a;
-    //if (comp(u1, p, p + 1) == 1)
-    if (fabs(u1 - fabs(*p)) > fabs(u1 - fabs(*(p + 1))))
+    if (comp(u1, p, p + 1) == 1)
     {
         k1 = p;
         k2 = p + 1;
@@ -43,8 +35,7 @@ void del(double *a, int *n, double u1)
     }
     for (int i = 2; i < *n; i++)
     {
-        //if (comp(u1, p + i, k2) == 1)
-        if (fabs(u1 - fabs(*(p + i))) > fabs(u1 - fabs(*k2)))
+        if (comp(u1, p + i, k2) == 1)
         {
             //if (comp(u1, p + i, k1) == 1)
             if (fabs(u1 - fabs(*p + i)) > fabs(u1 - fabs(*k1)))
@@ -53,13 +44,27 @@ void del(double *a, int *n, double u1)
                 k2 = p + i;
         }
     }
-    slip(n, a, k1);
+    p = a;
+    int j = 0;
+    while (p < k1)
+    {
+        p++;
+        j++;
+    }
+    slip(n, j, p);
     *n = *n - 1;
     if (k2 > k1)
         k2--;
     if (k2 > p)
         k2 = p;
-    slip(n, a, k2);
+    p = a;
+    j = 0;
+    while (p < k1)
+    {
+        p++;
+        j++;
+    }
+    slip(n, j, p);
     *n = *n - 1;
     return;
 }
