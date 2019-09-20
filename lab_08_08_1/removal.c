@@ -30,7 +30,8 @@ void slip(int *n, double *a, double *k)
 void del(double *a, int *n, double u1)
 {
     double *k1, *k2, *p = a;
-    if (comp(u1, p, (p + 1)) == 1)
+    //if (comp(u1, p, p + 1) == 1)
+    if (fabs(u1 - fabs(*p)) > fabs(u1 - fabs(*(p + 1))))
     {
         k1 = p;
         k2 = p + 1;
@@ -42,8 +43,10 @@ void del(double *a, int *n, double u1)
     }
     for (int i = 2; i < *n; i++)
     {
-        if (comp(u1, p + i, k2) == 1)
+        //if (comp(u1, p + i, k2) == 1)
+        if (fabs(u1 - fabs(*(p + i))) > fabs(u1 - fabs(*k2)))
         {
+            //if (comp(u1, p + i, k1) == 1)
             if (fabs(u1 - fabs(*p + i)) > fabs(u1 - fabs(*k1)))
                 k1 = p + i;
             else
