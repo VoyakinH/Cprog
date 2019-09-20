@@ -4,11 +4,11 @@
 #include <math.h>
 
 int comp(double u1, double *p1, double *p2)
- {
-     if (fabs(u1 - fabs(*p1)) > fabs(u1 - fabs(*p2)))
-         return 1;
-     return 0;
- }
+{
+    if (fabs(u1 - fabs(*p1)) > fabs(u1 - fabs(*p2)))
+        return 1;
+    return 0;
+}
 
 void del(double *a, int *n, double u1)
 {

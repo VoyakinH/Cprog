@@ -10,4 +10,3 @@ void out_arr(double *a, int n);
 void insert(double *a, int *n, int p, double u2);
 int new_size(double **a, int n);
 int comp(double u1, double *p1, double *p2);
-//void slip(int *n, int j, double *p);
