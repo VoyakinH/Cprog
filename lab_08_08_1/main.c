@@ -7,15 +7,14 @@ int main()
 {
     int rc = OK, n, p;
     double u1 = 0, u2 = 0;
-    if (read_n(stdin, &n) != OK)
-        rc = READ_N_ERR;
+    rc = read_n(stdin, &n);
     if (rc == OK)
     {
-        double *a = read_array(n, &rc);
+        double *a;
+        rc = read_array(n, &a);
         if (rc == OK)
         {
-            if (read_p(stdin, &p, n) != OK)
-                rc = READ_P_ERR;
+            rc = read_p(stdin, &p, n);
             if (rc == OK)
             {
                 count_u1(a, n, &u1);

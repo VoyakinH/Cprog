@@ -2,25 +2,23 @@
 #include <stdlib.h>
 #include "defines.h"
 
-double *read_array(int n, int *rc)
+int read_array(int n, double **a)
 {
-    double *a = malloc(sizeof(double) * n);
-    double p = 0;
-    if (!a)
+    double *new_a = malloc(sizeof(double) * n);
+    if (new_a)
     {
-        *rc = MEM_ERR;
-        return a;
+        *a = new_a;
+        new_a = NULL;
+    }
+    else
+    {
+        free(*a);
+        return READ_ARR_ERR;
     }
     for (int i = 0; i < n; i++)
-    {
-        if (scanf("%lf", &p) != 1)
-        {
-            *rc = READ_ARR_ERR;
-            break;
-        }
-        *(a + i) = p;
-    }
-    return a;
+        if (scanf("%lf", *a + i) != 1)
+            return READ_ARR_ERR;
+    return OK;
 }
 
 int new_size(double **a, int n)
