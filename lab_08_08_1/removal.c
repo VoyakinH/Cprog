@@ -37,7 +37,7 @@ void del(double *a, int *n, double u1)
     for (int i = 2; i < *n; i++)
     {
         //if (comp(u1, p + i, k2) == 1)
-        if (fabs(u1 - fabs(*p + i)) > fabs(u1 - fabs(*k1)))
+        if (fabs(u1 - fabs(*(p + i))) > fabs(u1 - fabs(*k2)))
         {
             //if (comp(u1, p + i, k1) == 1)
             if (fabs(u1 - fabs(*p + i)) > fabs(u1 - fabs(*k1)))
@@ -61,7 +61,7 @@ void del(double *a, int *n, double u1)
         k2 = p;
     p = a;
     j = 0;
-    while (p < k1)
+    while (p < k2)
     {
         p++;
         j++;
