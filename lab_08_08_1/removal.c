@@ -30,7 +30,7 @@ void slip(int *n, double *a, double *k)
 void del(double *a, int *n, double u1)
 {
     double *k1, *k2, *p = a;
-    if (comp(u1, p, p + 1) == 1)
+    if (comp(u1, p, (p + 1)) == 1)
     {
         k1 = p;
         k2 = p + 1;
