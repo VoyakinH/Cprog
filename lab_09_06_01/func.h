@@ -1,5 +1,5 @@
 #ifndef func_h
-#define func_h
+#define FUNC_H
 #include <stdio.h>
 
 int read_two_int(FILE *f, int *x, int *y);

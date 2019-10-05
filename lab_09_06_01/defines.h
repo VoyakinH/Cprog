@@ -1,5 +1,5 @@
 #ifndef defines_h
-#define defines_h
+#define DEFINES_H
 
 #define OK 0
 #define READ_SIZE_ERR -1
