@@ -16,45 +16,46 @@ int main()
         rc += read_array(p, q, &b, &b_p);
         if (rc == OK)
         {
-            make_square(&a_p, &n, &m);
-            make_square(&b_p, &p, &q);
-            rc = new_size(&a, &a_p, n, m);
-            rc += new_size(&b, &b_p, p, q);
+            make_square(&a, &a_p, &n, &m);
+            make_square(&b, &b_p, &p, &q);
+            if (n < p)
+            {
+                rc = increase_row_number(&a, &a_p, &n, m, p);
+                rc += increase_col_number(&a, &a_p, n, &m, q);
+            }
+            else
+            {
+                rc = increase_row_number(&b, &b_p, &p, q, n);
+                rc += increase_col_number(&b, &b_p, p, &q, m);
+            }
             if (rc == OK)
             {
-                if (n < p)
-                {
-                    rc = increase_row_number(&a, &a_p, &n, m, p);
-                    rc += increase_col_number(&a, &a_p, n, &m, q);
-                }
-                else
-                {
-                    rc = increase_row_number(&b, &b_p, &p, q, n);
-                    rc += increase_col_number(&b, &b_p, p, &q, m);
-                }
+                rc = read_two_power(stdin, &ro, &nu);
                 if (rc == OK)
                 {
-                    rc = read_two_power(stdin, &ro, &nu);
+                    int64_t *res = NULL, **res_p = NULL;
+                    rc = create_arr(&res, &res_p, n);
                     if (rc == OK)
                     {
-                        int64_t *res = NULL, **res_p = NULL;
-                        rc = create_arr(&res, &res_p, n);
-                        if (rc == OK)
-                        {
-                            fill(&res_p, &a_p, n, ro);
-                            count(&a_p, &b_p, &res_p, n, ro, nu);
-                            out_arr(&res_p, n, n);
-                        }
-                        free(res);
-                        free(res_p);
+                        fill(&res_p, &a_p, n, ro);
+                        count(&a_p, &b_p, &res_p, n, ro, nu);
+                        out_arr(&res_p, n, n);
                     }
+                    if (res)
+                        free(res);
+                    if (res_p)
+                        free(res_p);
                 }
             }
         }
-        free(b);
-        free(b_p);
+        if (b)
+            free(b);
+        if (b_p)
+            free(b_p);
     }
-    free(a);
-    free(a_p);
+    if (a)
+        free(a);
+    if (a_p)
+        free(a_p);
     return rc;
 }
