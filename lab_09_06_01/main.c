@@ -7,7 +7,7 @@
 int main()
 {
     int n, m, p, q, ro, nu, rc = OK;
-    int64_t *a = 0, **a_p = 0, *b = 0, **b_p = 0;
+    int64_t *a = NULL, **a_p = NULL, *b = NULL, **b_p = NULL;
     rc = read_two_int(stdin, &n, &m);
     rc += read_array(n, m, &a, &a_p);
     if (rc == OK)
@@ -37,7 +37,7 @@ int main()
                     rc = read_two_power(stdin, &ro, &nu);
                     if (rc == OK)
                     {
-                        int64_t *res = 0, **res_p = 0;
+                        int64_t *res = NULL, **res_p = NULL;
                         rc = create_arr(&res, &res_p, n);
                         if (rc == OK)
                         {

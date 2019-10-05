@@ -10,7 +10,7 @@ void sr_geom(int64_t ***a_p, int n, int i, int64_t *x)
     double s = 1;
     for (j = 0; j < n; j++)
         s *= (*a_p)[j][i];
-    *x = (int64_t) floor(pow(s, 1 / (float) n));
+    *x = (int64_t) floor(pow(fabs(s), 1 / (float) n));
     return;
 }
 
