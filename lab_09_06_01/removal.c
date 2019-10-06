@@ -39,9 +39,9 @@ int make_square(int64_t **a, int64_t ***a_p, int *n, int *m)
             for (i = 0; i < *n; i++)
                 for (j = y; j < *m - 1; j++)
                     (*a_p)[i][j] = (*a_p)[i][j + 1];
-                for (i = (*m - 1) * *n - 2; i >= *m - 1; i = i - *m)
-                    for (j = i; j < *m * *n - 2; j++)
-                        (*a_p)[0][j] = (*a_p)[0][j + 1];
+            for (i = (*m - 1) * *n - 2; i >= *m - 1; i = i - *m)
+                for (j = i; j < *m * *n - 2; j++)
+                    (*a_p)[0][j] = (*a_p)[0][j + 1];
             *m = *m - 1;
         }
         if (new_size(a, a_p, *n, *m) != OK)
