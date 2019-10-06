@@ -43,7 +43,8 @@ int increase_row_number(int64_t **a, int64_t ***a_p, int *n, int m, int p)
 
 int increase_col_number(int64_t **a, int64_t ***a_p, int n, int *m, int q)
 {
-    int i = 0, j = 0;
+    int i = 0, j = 0
+    ;
     while (*m != q)
     {
         *m = *m + 1;
