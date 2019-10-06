@@ -21,7 +21,7 @@ void find_min(int64_t ***a_p, int n, int m, int *x, int *y)
     return;
 }
 
-void make_square(int64_t **a, int64_t ***a_p, int *n, int *m)
+int make_square(int64_t **a, int64_t ***a_p, int *n, int *m)
 {
     int x = 0, y = 0, i, j;
     while (*n != *m)
@@ -44,7 +44,8 @@ void make_square(int64_t **a, int64_t ***a_p, int *n, int *m)
                         (*a_p)[0][j] = (*a_p)[0][j + 1];
             *m = *m - 1;
         }
-        new_size(a, a_p, *n, *m);
+        if (new_size(a, a_p, *n, *m) != OK)
+            return MEM_ERR;
     }
-    return;
+    return OK;
 }
