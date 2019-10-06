@@ -5,10 +5,10 @@
 
 int read_array(int x, int y, int64_t **a, int64_t ***a_p)
 {
-    int i, j;
+    int i = 0, j = 0;
     int64_t *new_a = malloc(x * y * sizeof(int64_t));
     int64_t **new_a_p = malloc(x * sizeof(int64_t*));
-    int64_t s;
+    int64_t s = 0;
     if (new_a && new_a_p)
     {
         *a = new_a;

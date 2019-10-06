@@ -3,7 +3,7 @@
 
 void fill(int64_t ***res_p, int64_t ***a_p, int n, int ro)
 {
-    int i, j;
+    int i = 0, j = 0;
     if (ro != 0)
         for (i = 0; i < n; i++)
             for (j = 0; j < n; j++)
@@ -22,7 +22,7 @@ void fill(int64_t ***res_p, int64_t ***a_p, int n, int ro)
 
 int64_t find_element(int64_t ***res_p, int64_t ***a_p, int n, int x, int y)
 {
-    int i;
+    int i = 0;
     int64_t s = 0;
     for (i = 0; i < n; i++)
         s += (*res_p)[x][i] * (*a_p)[i][y];
@@ -31,7 +31,7 @@ int64_t find_element(int64_t ***res_p, int64_t ***a_p, int n, int x, int y)
 
 void multiply(int64_t ***res_p, int64_t ***a_p, int n)
 {
-    int i, j;
+    int i = 0, j = 0;
     int64_t buff[n][n];
     for (i = 0; i < n; i++)
         for (j = 0; j < n; j++)
@@ -44,7 +44,7 @@ void multiply(int64_t ***res_p, int64_t ***a_p, int n)
 
 void count(int64_t ***a_p, int64_t ***b_p, int64_t ***res_p, int n, int ro, int nu)
 {
-    int i;
+    int i = 0;
     for (i = 0; i < ro - 1; i++)
         multiply(res_p, a_p, n);
     if (nu != 0)

@@ -6,7 +6,7 @@
 
 void sr_geom(int64_t ***a_p, int n, int i, int64_t *x)
 {
-    int j;
+    int j = 0;
     double s = 1;
     for (j = 0; j < n; j++)
         s *= (*a_p)[j][i];
@@ -43,7 +43,7 @@ int increase_row_number(int64_t **a, int64_t ***a_p, int *n, int m, int p)
 
 int increase_col_number(int64_t **a, int64_t ***a_p, int n, int *m, int q)
 {
-    int i, j;
+    int i = 0, j = 0;
     while (*m != q)
     {
         *m = *m + 1;

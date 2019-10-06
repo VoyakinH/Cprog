@@ -6,7 +6,7 @@
 
 void find_min(int64_t ***a_p, int n, int m, int *x, int *y)
 {
-    int i, j;
+    int i = 0, j = 0;
     *x = n - 1;
     *y = m - 1;
     int64_t min = (*a_p)[n - 1][m - 1];
@@ -23,7 +23,7 @@ void find_min(int64_t ***a_p, int n, int m, int *x, int *y)
 
 int make_square(int64_t **a, int64_t ***a_p, int *n, int *m)
 {
-    int x = 0, y = 0, i, j;
+    int x = 0, y = 0, i = 0, j = 0;
     while (*n != *m)
     {
         find_min(a_p, *n, *m, &x, &y);

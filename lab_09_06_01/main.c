@@ -20,7 +20,7 @@ int main()
             rc += make_square(&b, &b_p, &p, &q);
             if (rc == OK)
             {
-                if (n < p)
+                if (n < p && n != p)
                 {
                     rc = increase_row_number(&a, &a_p, &n, m, p);
                     rc += increase_col_number(&a, &a_p, n, &m, q);
