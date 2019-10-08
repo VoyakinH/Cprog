@@ -216,6 +216,79 @@ int make_square_work_cor()
         return 1;
     return 0;
 }
+
+int increase_row_number_work_cor()
+{
+    int n = 2, m = 2, p = 3, i, rc, count = 0;
+    int64_t *a = malloc(n * m *sizeof(int64_t));
+    int64_t **a_p = malloc(n * sizeof(int64_t*));
+    for (i = 0; i < n * n; i++)
+        a[i] = i;
+    rc = increase_row_number(&a, &a_p, &n, m, p);
+    if (rc == OK && n == 3 && a_p[0][0] == 0 && a_p[0][1] == 1 && a_p[1][0] == 2 &&
+        a_p[1][1] == 3 && a_p[2][0] == 0 && a_p[2][1] == 1)
+        count++;
+    free(a);
+    free(a_p);
+    n = 2;
+    m = 2;
+    p = 4;
+    a = malloc(n * m * sizeof(int64_t));
+    a_p = malloc(n * sizeof(int64_t*));
+    for (i = 0; i < n * n; i++)
+        a[i] = i;
+    rc = increase_row_number(&a, &a_p, &n, m, p);
+    if (rc == OK && n == 4 && a_p[0][0] == 0 && a_p[0][1] == 1 && a_p[1][0] == 2 &&
+        a_p[1][1] == 3 && a_p[2][0] == 0 && a_p[2][1] == 1  && a_p[3][0] == 0 && a_p[3][1] == 1)
+        count++;
+    free(a);
+    free(a_p);
+    if (count == 2)
+        printf("increase_row_number: OK\n");
+    else
+        printf("increase_row_number: Failed\n");
+    printf("Tests passed %d of 2\n\n", count);
+    if (count == 2)
+        return 1;
+    return 0;
+}
+
+int increase_col_number_work_cor()
+{
+    int n = 2, m = 2, q = 3, i, rc, count = 0;
+    int64_t *a = malloc(n * m *sizeof(int64_t));
+    int64_t **a_p = malloc(n * sizeof(int64_t*));
+    for (i = 0; i < n * n; i++)
+        a[i] = i;
+    rc = increase_col_number(&a, &a_p, n, &m, q);
+    if (rc == OK && m == 3 && a_p[0][0] == 0 && a_p[0][1] == 1 && a_p[1][0] == 2 &&
+        a_p[1][1] == 3 && a_p[0][2] == 0 && a_p[1][2] == 2)
+        count++;
+    free(a);
+    free(a_p);
+    n = 2;
+    m = 2;
+    q = 4;
+    a = malloc(n * m * sizeof(int64_t));
+    a_p = malloc(n * sizeof(int64_t*));
+    for (i = 0; i < n * n; i++)
+        a[i] = i;
+    rc = increase_col_number(&a, &a_p, n, &m, q);
+    if (rc == OK && m == 4 && a_p[0][0] == 0 && a_p[0][1] == 1 && a_p[1][0] == 2 &&
+        a_p[1][1] == 3 && a_p[0][2] == 0 && a_p[0][3] == 0 && a_p[1][2] == 2 && a_p[1][3] == 2)
+        count++;
+    free(a);
+    free(a_p);
+    if (count == 2)
+        printf("increase_col_number: OK\n");
+    else
+        printf("increase_col_number: Failed\n");
+    printf("Tests passed %d of 2\n\n", count);
+    if (count == 2)
+        return 1;
+    return 0;
+}
+
 int main()
 {
     int count = 0;
@@ -225,6 +298,8 @@ int main()
     count += read_array_work_cor();
     count += create_arr_work_cor();
     count += make_square_work_cor();
-    printf("Test functions passed %d of 6\n", count);
+    count += increase_row_number_work_cor();
+    count += increase_col_number_work_cor();
+    printf("Test functions passed %d of 8\n", count);
     return 0;
 }
