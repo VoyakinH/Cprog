@@ -11,13 +11,13 @@ int main()
     rc = read_two_int(stdin, &n, &m);
     if (rc == OK)
     {
-        rc = read_array(n, m, &a, &a_p);
+        rc = read_array(stdin, n, m, &a, &a_p);
         if (rc == OK)
         {
             rc = read_two_int(stdin, &p, &q);
             if (rc == OK)
             {
-                rc = read_array(p, q, &b, &b_p);
+                rc = read_array(stdin, p, q, &b, &b_p);
                 if (rc == OK)
                 {
                     rc = make_square(&a, &a_p, &n, &m);
@@ -60,7 +60,6 @@ int main()
                 if (b_p)
                     free(b_p);
             }
-            
         }
         if (a)
             free(a);

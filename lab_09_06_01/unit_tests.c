@@ -129,12 +129,83 @@ int out_arr_work_cor()
     return 0;
 }
 
+int read_array_work_cor()
+{
+    int i, j, count_buff, count = 0, rc;
+    int64_t *a = NULL, **a_p = NULL;
+    FILE *buff = fopen("buff.txt", "w+");
+    for (i = 1; i < 5; i++)
+    {
+        rewind(buff);
+        for (j = 0; j < i * i; j++)
+            fprintf(buff, "%d ", j);
+        rewind(buff);
+        rc = read_array(buff, i, i, &a, &a_p);
+        count_buff = 0;
+        for (j = 0; j < i * i; j++)
+            if (a[j] == j)
+                count_buff++;
+        if (count_buff == i * i && rc == OK)
+            count++;
+        free(a);
+        free(a_p);
+    }
+    fclose(buff);
+    if (count == 4)
+        printf("read_arr: OK\n");
+    else
+        printf("read_arr: Failed\n");
+    printf("Tests passed %d of 4\n\n", count);
+    if (count == 4)
+        return 1;
+    return 0;
+}
+
+int create_arr_work_cor()
+{
+    int64_t *a = NULL, **a_p = NULL;
+    int count = 0;
+    if (create_arr(&a, &a_p, 10) == OK)
+        count++;
+    if (count == 1)
+        printf("create_arr: OK\n");
+    else
+        printf("create_arr: Failed\n");
+    printf("Tests passed %d of 1\n\n", count);
+    if (count == 1)
+        return 1;
+    return 0;
+}
+
+int new_size_work_cor()
+{
+    int rc, count = 0;
+    int64_t *a = malloc(2 * 2 * sizeof(int64_t));
+    int64_t **a_p = malloc(2 * sizeof(int64_t*));
+    rc = new_size(&a, &a_p, 4, 4);
+    if (rc == OK)
+        count++;
+    free(a);
+    free(a_p);
+    if (count == 1)
+        printf("new_size: OK\n");
+    else
+        printf("new_size: Failed\n");
+    printf("Tests passed %d of 1\n\n", count);
+    if (count == 1)
+        return 1;
+    return 0;
+}
+
 int main()
 {
     int count = 0;
     count += read_two_int_work_cor();
     count += read_two_power_work_cor();
     count += out_arr_work_cor();
-    printf("Test functions passed %d of 3\n", count);
+    count += read_array_work_cor();
+    count += create_arr_work_cor();
+    count += new_size_work_cor();
+    printf("Test functions passed %d of 6\n", count);
     return 0;
 }

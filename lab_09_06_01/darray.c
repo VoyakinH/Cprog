@@ -3,7 +3,7 @@
 #include <inttypes.h>
 #include "defines.h"
 
-int read_array(int x, int y, int64_t **a, int64_t ***a_p)
+int read_array(FILE *f, int x, int y, int64_t **a, int64_t ***a_p)
 {
     int i = 0, j = 0;
     int64_t *new_a = malloc(x * y * sizeof(int64_t));
@@ -23,7 +23,7 @@ int read_array(int x, int y, int64_t **a, int64_t ***a_p)
     for (i = 0; i < x; i++)
         for (j = 0; j < y; j++)
         {
-            if (scanf("%" PRId64, &s) != 1)
+            if (fscanf(f, "%" PRId64, &s) != 1)
                 return READ_ARR_ERR;
             else
                 (*a_p)[i][j] = s;
