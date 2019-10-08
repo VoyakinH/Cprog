@@ -47,8 +47,7 @@ void count(int64_t ***a_p, int64_t ***b_p, int64_t ***res_p, int n, int ro, int 
     int i = 0;
     for (i = 0; i < ro - 1; i++)
         multiply(res_p, a_p, n);
-    if (nu != 0)
-        for (i = 0; i < nu; i++)
-            multiply(res_p, b_p, n);
+    for (i = 0; i < nu; i++)
+        multiply(res_p, b_p, n);
     return;
 }

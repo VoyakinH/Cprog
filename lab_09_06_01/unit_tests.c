@@ -220,7 +220,7 @@ int make_square_work_cor()
 int increase_row_number_work_cor()
 {
     int n = 2, m = 2, p = 3, i, rc, count = 0;
-    int64_t *a = malloc(n * m *sizeof(int64_t));
+    int64_t *a = malloc(n * m * sizeof(int64_t));
     int64_t **a_p = malloc(n * sizeof(int64_t*));
     for (i = 0; i < n * n; i++)
         a[i] = i;
@@ -239,7 +239,7 @@ int increase_row_number_work_cor()
         a[i] = i;
     rc = increase_row_number(&a, &a_p, &n, m, p);
     if (rc == OK && n == 4 && a_p[0][0] == 0 && a_p[0][1] == 1 && a_p[1][0] == 2 &&
-        a_p[1][1] == 3 && a_p[2][0] == 0 && a_p[2][1] == 1  && a_p[3][0] == 0 && a_p[3][1] == 1)
+        a_p[1][1] == 3 && a_p[2][0] == 0 && a_p[2][1] == 1 && a_p[3][0] == 0 && a_p[3][1] == 1)
         count++;
     free(a);
     free(a_p);
@@ -256,7 +256,7 @@ int increase_row_number_work_cor()
 int increase_col_number_work_cor()
 {
     int n = 2, m = 2, q = 3, i, rc, count = 0;
-    int64_t *a = malloc(n * m *sizeof(int64_t));
+    int64_t *a = malloc(n * m * sizeof(int64_t));
     int64_t **a_p = malloc(n * sizeof(int64_t*));
     for (i = 0; i < n * n; i++)
         a[i] = i;
@@ -289,6 +289,62 @@ int increase_col_number_work_cor()
     return 0;
 }
 
+int fill_work_cor()
+{
+    int n = 2, ro = 1, i, j, count_buff = 0, count = 0;
+    int64_t *a = malloc(n * n * sizeof(int64_t));
+    int64_t **a_p = malloc(n * sizeof(int64_t*));
+    int64_t *res = malloc(n * n * sizeof(int64_t));
+    int64_t **res_p = malloc(n * sizeof(int64_t*));
+    for (i = 0; i < n; i++)
+    {
+        a_p[i] = a + i * n;
+        res_p[i] = res + i * n;
+    }
+    for (i = 0; i < n * n; i++)
+        a[i] = i;
+    fill(&res_p, &a_p, n, ro);
+    for (i = 0; i < n; i++)
+        for (j = 0; j < n; j++)
+            if (a_p[i][j] == res_p[i][j])
+                count_buff++;
+    if (count_buff == n * n)
+        count++;
+    free(a);
+    free(a_p);
+    free(res);
+    free(res_p);
+    n = 2;
+    ro = 0;
+    count_buff = 0;
+    a = malloc(n * n * sizeof(int64_t));
+    a_p = malloc(n * sizeof(int64_t*));
+    res = malloc(n * n * sizeof(int64_t));
+    res_p = malloc(n * sizeof(int64_t*));
+    for (i = 0; i < n; i++)
+    {
+        a_p[i] = a + i * n;
+        res_p[i] = res + i * n;
+    }
+    for (i = 0; i < n * n; i++)
+        a[i] = i;
+    fill(&res_p, &a_p, n, ro);
+    if (res_p[0][0] == 1 && res_p[0][1] == 0 && res_p[1][0] == 0 && res_p[1][1] == 1)
+        count++;
+    free(a);
+    free(a_p);
+    free(res);
+    free(res_p);
+    if (count == 2)
+        printf("fill: OK\n");
+    else
+        printf("fill: Failed\n");
+    printf("Tests passed %d of 2\n\n", count);
+    if (count == 2)
+        return 1;
+    return 0;
+}
+
 int main()
 {
     int count = 0;
@@ -300,6 +356,7 @@ int main()
     count += make_square_work_cor();
     count += increase_row_number_work_cor();
     count += increase_col_number_work_cor();
-    printf("Test functions passed %d of 8\n", count);
+    count += fill_work_cor();
+    printf("Test functions passed %d of 9\n", count);
     return 0;
 }
