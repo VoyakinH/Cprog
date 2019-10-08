@@ -42,7 +42,7 @@ void multiply(int64_t ***res_p, int64_t ***a_p, int n)
     return;
 }
 
-void count(int64_t ***a_p, int64_t ***b_p, int64_t ***res_p, int n, int ro, int nu)
+void count_result(int64_t ***a_p, int64_t ***b_p, int64_t ***res_p, int n, int ro, int nu)
 {
     int i = 0;
     for (i = 0; i < ro - 1; i++)

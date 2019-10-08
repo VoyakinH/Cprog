@@ -44,7 +44,7 @@ int main()
                                 if (rc == OK)
                                 {
                                     fill(&res_p, &a_p, n, ro);
-                                    count(&a_p, &b_p, &res_p, n, ro, nu);
+                                    count_result(&a_p, &b_p, &res_p, n, ro, nu);
                                     out_arr(stdout, res_p, n, n);
                                 }
                                 if (res)

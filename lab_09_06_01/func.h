@@ -12,6 +12,6 @@ int increase_col_number(int64_t **a, int64_t ***a_p, int n, int *m, int q);
 int read_two_power(FILE *f, int *x, int *y);
 void fill(int64_t ***res_p, int64_t ***a_p, int n, int ro);
 int create_arr(int64_t **res, int64_t ***res_p, int n);
-void count(int64_t ***a_p, int64_t ***b_p, int64_t ***res_p, int n, int ro, int nu);
+void count_result(int64_t ***a_p, int64_t ***b_p, int64_t ***res_p, int n, int ro, int nu);
 
 #endif

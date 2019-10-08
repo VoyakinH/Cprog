@@ -345,6 +345,83 @@ int fill_work_cor()
     return 0;
 }
 
+int count_work_cor()
+{
+    int i, j, n = 2, ro = 0, nu = 1, count = 0;
+    int64_t *a = malloc(n * n * sizeof(int64_t));
+    int64_t **a_p = malloc(n * sizeof(int64_t*));
+    int64_t *b = malloc(n * n * sizeof(int64_t));
+    int64_t **b_p = malloc(n * sizeof(int64_t*));
+    int64_t *res = malloc(n * n * sizeof(int64_t));
+    int64_t **res_p = malloc(n * sizeof(int64_t*));
+    for (i = 0; i < n; i++)
+    {
+        a_p[i] = a + i * n;
+        b_p[i] = a + i * n;
+        res_p[i] = res + i * n;
+    }
+    for (i = 0; i < n * n; i++)
+    {
+        a[i] = i;
+        b[i] = i;
+    }
+    fill(&res_p, &a_p, n, ro);
+    count_result(&a_p, &b_p, &res_p, n, ro, nu);
+    if (res_p[0][0] == 0 && res_p[0][1] == 1 && res_p[1][0] == 2 && res_p[1][1] == 3)
+        count++;
+    free(a);
+    free(a_p);
+    free(b);
+    free(b_p);
+    free(res);
+    free(res_p);
+    n = 3;
+    ro = 2;
+    nu = 3;
+    a = malloc(n * n * sizeof(int64_t));
+    a_p = malloc(n * sizeof(int64_t*));
+    b = malloc(n * n * sizeof(int64_t));
+    b_p = malloc(n * sizeof(int64_t*));
+    res = malloc(n * n * sizeof(int64_t));
+    res_p = malloc(n * sizeof(int64_t*));
+    for (i = 0; i < n; i++)
+    {
+        a_p[i] = a + i * n;
+        b_p[i] = b + i * n;
+        res_p[i] = res + i * n;
+    }
+    for (i = 0; i < n * n; i++)
+    {
+        a[i] = i;
+        b[i] = i + 1;
+    }
+    fill(&res_p, &a_p, n, ro);
+    count_result(&a_p, &b_p, &res_p, n, ro, nu);
+    int count_buff = 0;
+    int64_t x[3][3] = {{ 60912, 74844, 88776 }, { 186300, 228906, 271512 },
+        { 311688, 382968, 454248 }};
+    for (i = 0; i < n; i++)
+        for (j = 0; j < n; j++)
+            if (x[i][j] == res_p[i][j])
+                count_buff++;
+    if (count_buff == n * n)
+        count++;
+    free(a);
+    free(a_p);
+    free(b);
+    free(b_p);
+    free(res);
+    free(res_p);
+    if (count == 2)
+        printf("count: OK\n");
+    else
+        printf("count: Failed\n");
+    printf("Tests passed %d of 2\n\n", count);
+    if (count == 2)
+        return 1;
+    return 0;
+}
+
 int main()
 {
     int count = 0;
@@ -357,6 +434,7 @@ int main()
     count += increase_row_number_work_cor();
     count += increase_col_number_work_cor();
     count += fill_work_cor();
-    printf("Test functions passed %d of 9\n", count);
+    count += count_work_cor();
+    printf("Test functions passed %d of 10\n", count);
     return 0;
 }
