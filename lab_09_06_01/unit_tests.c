@@ -167,6 +167,8 @@ int create_arr_work_cor()
     int count = 0;
     if (create_arr(&a, &a_p, 10) == OK)
         count++;
+    free(a);
+    free(a_p);
     if (count == 1)
         printf("create_arr: OK\n");
     else
@@ -197,6 +199,43 @@ int new_size_work_cor()
     return 0;
 }
 
+int make_square_work_cor()
+{
+    int n = 2, m = 3, i, rc, count = 0;
+    int64_t *a = malloc(n * m * sizeof(int64_t));
+    int64_t **a_p = malloc(n * sizeof(int64_t*));
+    for (i = 0; i < n; i++)
+        a_p[i] = a + i * m;
+    for (i = 0; i < n * m; i++)
+        a[i] = i;
+    rc = make_square(&a, &a_p, &n, &m);
+    if (rc == OK && a_p[0][0] == 1 && a_p[0][1] == 2 && a_p[1][0] == 4 &&
+        a_p[1][1] == 5 && n == 2 && m == 2)
+        count++;
+    free(a);
+    free(a_p);
+    n = 2;
+    m = 1;
+    a = malloc(n * m * sizeof(int64_t));
+    a_p = malloc(n * sizeof(int64_t*));
+    for (i = 0; i < n; i++)
+        a_p[i] = a + i * m;
+    for (i = 0; i < n * m; i++)
+        a[i] = i;
+    rc = make_square(&a, &a_p, &n, &m);
+    if (rc == OK && a_p[0][0] == 1)
+        count++;
+    free(a);
+    free(a_p);
+    if (count == 2)
+        printf("make_square: OK\n");
+    else
+        printf("make_squeare: Failed\n");
+    printf("Tests passed %d of 2\n\n", count);
+    if (count == 2)
+        return 1;
+    return 0;
+}
 int main()
 {
     int count = 0;
@@ -206,6 +245,7 @@ int main()
     count += read_array_work_cor();
     count += create_arr_work_cor();
     count += new_size_work_cor();
-    printf("Test functions passed %d of 6\n", count);
+    count += make_square_work_cor();
+    printf("Test functions passed %d of 7\n", count);
     return 0;
 }
