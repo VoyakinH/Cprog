@@ -8,10 +8,9 @@ void sr_geom(int64_t ***a_p, int n, int i, int64_t *x)
 {
     int j = 0;
     double s = 1;
-    double power = 1.0 / ((float) n);
     for (j = 0; j < n; j++)
         s *= (double) (*a_p)[j][i];
-    *x = (int64_t) floor(pow(fabs(s), power));
+    *x = (int64_t) floor(pow(fabs(s), (double) (1.0 / (double) n)));
     return;
 }
 
