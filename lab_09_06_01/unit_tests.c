@@ -179,26 +179,6 @@ int create_arr_work_cor()
     return 0;
 }
 
-int new_size_work_cor()
-{
-    int rc, count = 0;
-    int64_t *a = malloc(2 * 2 * sizeof(int64_t));
-    int64_t **a_p = malloc(2 * sizeof(int64_t*));
-    rc = new_size(&a, &a_p, 4, 4);
-    if (rc == OK)
-        count++;
-    free(a);
-    free(a_p);
-    if (count == 1)
-        printf("new_size: OK\n");
-    else
-        printf("new_size: Failed\n");
-    printf("Tests passed %d of 1\n\n", count);
-    if (count == 1)
-        return 1;
-    return 0;
-}
-
 int make_square_work_cor()
 {
     int n = 2, m = 3, i, rc, count = 0;
@@ -244,8 +224,7 @@ int main()
     count += out_arr_work_cor();
     count += read_array_work_cor();
     count += create_arr_work_cor();
-    count += new_size_work_cor();
     count += make_square_work_cor();
-    printf("Test functions passed %d of 7\n", count);
+    printf("Test functions passed %d of 6\n", count);
     return 0;
 }
