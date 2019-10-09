@@ -24,12 +24,12 @@ int main()
                     rc += make_square(&b, &b_p, &p, &q);
                     if (rc == OK)
                     {
-                        if (n < p && n != p)
+                        if (n < p)
                         {
                             rc = increase_row_number(&a, &a_p, &n, m, p);
                             rc += increase_col_number(&a, &a_p, n, &m, q);
                         }
-                        else if (n > p && n != p)
+                        else if (n != p)
                         {
                             rc = increase_row_number(&b, &b_p, &p, q, n);
                             rc += increase_col_number(&b, &b_p, p, &q, m);
