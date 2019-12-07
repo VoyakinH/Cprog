@@ -1,0 +1,17 @@
+# Func tests for LR No10
+- in_01 -- negative -- incorrect day in date
+- in_02 -- negative -- incorrect month in date
+- in_03 -- negative -- incorrect date (february)
+- in_04 -- negative -- incorrect year in date
+- in_05 -- negative -- incorrect day in date
+- in_06 -- negative -- number of experiments is zero
+- in_07 -- negative -- number of experiments below zero
+- in_08 -- negative -- more values then need
+- in_09 -- negative -- key is incorrect
+- in_10 -- positive -- write to text file two experiments with sort by DATA
+- in_11 -- positive -- write to text file two experiments with sort by DATE
+- in_12 -- positive -- write to text file when only one experiment without key and sort
+- in_13 -- negative -- letter in date
+- in_14 -- negative -- number in technician
+- in_15 -- negative -- zero experiments
+- in_16 -- negative -- invalid technician
