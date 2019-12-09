@@ -3,9 +3,9 @@
 #include "defines.h"
 #include "func.h"
 
-int init_list(stack **factors)
+int init_list(list **factors)
 {
-    stack *factors_new = calloc(1, sizeof(stack));
+    list *factors_new = calloc(1, sizeof(list));
     if (!factors)
         return ALLOCATION_ERR;
     *factors = factors_new;
@@ -15,9 +15,9 @@ int init_list(stack **factors)
     return OK;
 }
 
-int increase_stack(stack **factors)
+int increase_list(list **factors)
 {
-    stack *factors_new = calloc(1, sizeof(stack));
+    list *factors_new = calloc(1, sizeof(list));
     if (!factors_new)
         return ALLOCATION_ERR;
     factors_new->next_factor = *factors;
@@ -27,11 +27,11 @@ int increase_stack(stack **factors)
     return OK;
 }
 
-void free_stack(stack **factors)
+void free_list(list **factors)
 {
     while ((*factors)->next_factor != NULL)
     {
-        stack *buff = *factors;
+        list *buff = *factors;
         *factors = (*factors)->next_factor;
         free(buff);
     }
@@ -39,18 +39,57 @@ void free_stack(stack **factors)
     return;
 }
 
-void output_stack(FILE *f, stack *factors)
+void output_list(FILE *f, list *factors)
 {
-    while (factors->next_factor != NULL)
+    while (factors != NULL)
     {
-        if (factors->pow > 0)
-            fprintf(f, "%d %d ", factors->factor, factors->pow);
-        stack *buff = factors;
+        fprintf(f, "%d %d ", factors->factor, factors->pow);
+        list *buff = factors;
         factors = factors->next_factor;
         free(buff);
     }
-    if (factors->pow > 0)
-        fprintf(f, "%d %d 1\n", factors->factor, factors->pow);
-    free(factors);
+    printf("1\n");
+    return;
+}
+
+void combine_lists(list **factors_both, list **factors)
+{
+    list *backup = *factors_both;
+    list *buff = NULL;
+    while (*factors != NULL)
+    {
+        if ((*factors_both) == NULL)
+        {
+            (*factors_both) = (*factors);
+            backup = (*factors);
+            (*factors) = (*factors)->next_factor;
+        }
+        else if ((*factors_both)->factor == (*factors)->factor)
+        {
+            (*factors_both)->pow += (*factors)->pow;
+            list *buff_to_free = (*factors);
+            (*factors) = (*factors)->next_factor;
+            free(buff_to_free);
+        }
+        else if ((*factors)->factor > (*factors_both)->factor)
+        {
+            buff = (*factors);
+            (*factors) = (*factors)->next_factor;
+            buff->next_factor = (*factors_both);
+            (*factors_both) = buff;
+            backup = (*factors_both);
+        }
+        else if ((*factors_both)->next_factor == NULL)
+        {
+            (*factors_both)->next_factor = (*factors);
+            ((*factors_both)->next_factor)->next_factor = NULL;
+            (*factors) = (*factors)->next_factor;
+        }
+        else if ((*factors)->factor < (*factors_both)->factor)
+        {
+            (*factors_both) = (*factors_both)->next_factor;
+        }
+    }
+    (*factors_both) = backup;
     return;
 }

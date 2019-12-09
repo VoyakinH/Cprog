@@ -1,9 +1,10 @@
 #include <stdio.h>
 #include <string.h>
+#include <stdlib.h>
 #include "defines.h"
 #include "func.h"
 
-int factorize(stack **factors, int val)
+int factorize(list **factors, int val)
 {
     while (val != 1)
     {
@@ -12,11 +13,13 @@ int factorize(stack **factors, int val)
             val /= (*factors)->factor;
             ((*factors)->pow)++;
         }
-        if (val != 1)
+        if ((*factors)->pow == 0)
+            ((*factors)->factor)++;
+        else if (val != 1)
         {
-            if (increase_stack(factors) != OK)
+            if (increase_list(factors) != OK)
             {
-                free_stack(factors);
+                free_list(factors);
                 return ALLOCATION_ERR;
             }
         }
@@ -24,20 +27,77 @@ int factorize(stack **factors, int val)
     return OK;
 }
 
-int out_func(void)
+int int_to_list(list **factors)
 {
-    int val;
+    int val = 0;
     if (read_int(FILE_NAME, &val) != OK)
         return READ_INT_ERR;
-    stack *factors;
-    if (init_list(&factors) != OK)
+    if (init_list(factors) != OK)
         return ALLOCATION_ERR;
-    if (factorize(&factors, val) != OK)
+    if (factorize(factors, val) != OK)
     {
-        free_stack(&factors);
+        free_list(factors);
         return ALLOCATION_ERR;
     }
-    output_stack(stdout, factors);
+    if ((*factors)->pow == 0)
+    {
+        free(*factors);
+        *factors = NULL;
+    }
+    return OK;
+}
+
+void double_every_pow(list *factors)
+{
+    list *buffer = factors;
+    while (buffer->next_factor != NULL)
+    {
+        buffer->pow *= 2;
+        buffer = buffer->next_factor;
+    }
+    buffer->pow *= 2;
+    return;
+}
+
+int out_func()
+{
+    list *factors;
+    int res = int_to_list(&factors);
+    if (res != OK)
+        return res;
+    output_list(stdout, factors);
+    return OK;
+}
+
+int sqr_func()
+{
+    list *factors;
+    int res = int_to_list(&factors);
+    if (res != OK)
+        return res;
+    double_every_pow(factors);
+    output_list(stdout, factors);
+    return OK;
+}
+
+int mul_func()
+{
+    list *factors_1;
+    list *factors_2;
+    int res = int_to_list(&factors_1);
+    if (res != OK)
+        return res;
+    res = int_to_list(&factors_2);
+    if (res != OK)
+        return res;
+    combine_lists(&factors_1, &factors_2);
+    output_list(stdout, factors_1);
+    return OK;
+}
+
+int div_func()
+{
+    
     return OK;
 }
 
@@ -45,12 +105,12 @@ int check_mode(const char mode[])
 {
     if (strcmp(mode, "out") == 0)
         out_func();
-//    else if (strcmp(mode, "mul") == 0)
-//
-//    else if (strcmp(mode, "div") == 0)
-//
-//    else if (strcmp(mode, "sqr") == 0)
-//
+    else if (strcmp(mode, "mul") == 0)
+        mul_func();
+    else if (strcmp(mode, "div") == 0)
+        div_func();
+    else if (strcmp(mode, "sqr") == 0)
+        sqr_func();
     else
         return READ_MODE_ERR;
     return OK;

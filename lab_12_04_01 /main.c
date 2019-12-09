@@ -6,7 +6,7 @@
 int main()
 {
     char mode[4];
-    if (read_mode(FILE_NAME, mode) != OK || check_mode(mode) != OK)
+    if (read_mode(FILE_NAME, mode) != OK)
         return READ_MODE_ERR;
-    return OK;
+    return check_mode(mode);
 }
