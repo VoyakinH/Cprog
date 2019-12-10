@@ -63,6 +63,7 @@ void combine_lists(list **factors_both, list **factors)
             (*factors_both) = (*factors);
             backup = (*factors);
             (*factors) = (*factors)->next_factor;
+            (*factors_both)->next_factor = NULL;
         }
         else if ((*factors_both)->factor == (*factors)->factor)
         {

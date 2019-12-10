@@ -9,5 +9,5 @@ utest: test.exe
 	gcc -c $< -o $@ $(KEY)
 clean:
 	rm *.exe *.o
-func_test: app.exe
+ftest: app.exe
 	./func_tests/func_tests.exec

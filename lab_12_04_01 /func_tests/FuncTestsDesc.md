@@ -1,0 +1,17 @@
+# Func tests for LR No12
+- in_01 -- negative -- incorrect mode
+- in_02 -- negative -- negative int
+- in_03 -- negative -- val == 0
+- in_04 -- negative -- div == 0
+- in_05 -- positive -- out for 1
+- in_06 -- positive -- out
+- in_07 -- positive -- out
+- in_08 -- positive -- mul
+- in_09 -- positive -- mul
+- in_10 -- positive -- mul
+- in_11 -- positive -- div
+- in_12 -- positive -- div
+- in_13 -- positive -- div
+- in_14 -- positive -- sqr
+- in_15 -- positive -- sqr  == 1
+- in_16 -- positive -- sqr
