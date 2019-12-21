@@ -1,0 +1,2 @@
+
+#define OK 0
