@@ -48,7 +48,7 @@ void output_list(FILE *f, list *factors)
         factors = factors->next_factor;
         free(buff);
     }
-    printf("1\n");
+    fprintf(f, "1\n");
     return;
 }
 
