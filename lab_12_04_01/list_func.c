@@ -79,8 +79,10 @@ void combine_lists(list **factors_both, list **factors)
             (*factors) = (*factors)->next_factor;
             buff->next_factor = (*factors_both);
             (*factors_both) = buff;
-            prev_elem->next_factor = *factors_both;
-            //backup = (*factors_both);
+            if (prev_elem != NULL)
+                prev_elem->next_factor = *factors_both;
+            else
+                backup = (*factors_both);
         }
         else if ((*factors_both)->next_factor == NULL)
         {
