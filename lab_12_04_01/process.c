@@ -60,10 +60,7 @@ void double_every_pow(list *factors)
 
 int out_func(FILE *fin, list **factors)
 {
-    int res = int_to_list(fin, factors);
-    if (res != OK)
-        return res;
-    return OK;
+    return int_to_list(fin, factors);
 }
 
 int sqr_func(FILE *fin, list **factors)
