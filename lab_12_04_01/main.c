@@ -6,7 +6,12 @@
 int main()
 {
     char mode[5];
-    if (read_mode(FILE_NAME, mode) != OK)
+    list *factors;
+    if (read_mode(stdin, mode) != OK)
         return READ_MODE_ERR;
-    return check_mode(mode);
+    int err = check_mode(stdin, mode, &factors);
+    if (err != OK)
+        return err;
+    output_list(stdout, factors);
+    return OK;
 }

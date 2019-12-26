@@ -27,10 +27,10 @@ int factorize(list **factors, int val)
     return OK;
 }
 
-int int_to_list(list **factors)
+int int_to_list(FILE *fin, list **factors)
 {
     int val = 0;
-    if (read_int(FILE_NAME, &val) != OK)
+    if (read_int(fin, &val) != OK)
         return READ_INT_ERR;
     if (init_list(factors) != OK)
         return ALLOCATION_ERR;
@@ -58,45 +58,39 @@ void double_every_pow(list *factors)
     return;
 }
 
-int out_func()
+int out_func(FILE *fin, list **factors)
 {
-    list *factors;
-    int res = int_to_list(&factors);
+    int res = int_to_list(fin, factors);
     if (res != OK)
         return res;
-    output_list(stdout, factors);
     return OK;
 }
 
-int sqr_func()
+int sqr_func(FILE *fin, list **factors)
 {
-    list *factors;
-    int res = int_to_list(&factors);
+    int res = int_to_list(fin, factors);
     if (res != OK)
         return res;
-    double_every_pow(factors);
-    output_list(stdout, factors);
+    double_every_pow(*factors);
     return OK;
 }
 
-int mul_func()
+int mul_func(FILE *fin, list **factors)
 {
 //  -------------------
 //      HARD WAY
 //  -------------------
-    list *factors_1;
     list *factors_2;
-    int res = int_to_list(&factors_1);
+    int res = int_to_list(fin, factors);
     if (res != OK)
         return res;
-    res = int_to_list(&factors_2);
+    res = int_to_list(fin, &factors_2);
     if (res != OK)
     {
-        free_list(&factors_1);
+        free_list(factors);
         return res;
     }
-    combine_lists(&factors_1, &factors_2);
-    output_list(stdout, factors_1);
+    combine_lists(factors, &factors_2);
 //  -------------------
 //      EASY WAY
 //  -------------------
@@ -114,39 +108,37 @@ int mul_func()
     return OK;
 }
 
-int div_func()
+int div_func(FILE *fin, list **factors)
 {
 //  -------------------
 //       EASY WAY
 //  -------------------
-    list *factors = NULL;
     int val_1, val_2;
-    if (read_int(FILE_NAME, &val_1) != OK || read_int(FILE_NAME, &val_2) != OK)
+    if (read_int(fin, &val_1) != OK || read_int(fin, &val_2) != OK)
         return READ_INT_ERR;
     val_1 /= val_2;
     if (val_1 == 0)
         return READ_INT_ERR;
-    if (init_list(&factors) != OK || factorize(&factors, val_1) != OK)
+    if (init_list(factors) != OK || factorize(factors, val_1) != OK)
         return ALLOCATION_ERR;
-    if (factors->pow == 0)
+    if ((*factors)->pow == 0)
     {
-        free(factors);
-        factors = NULL;
+        free(*factors);
+        *factors = NULL;
     }
-    output_list(stdout, factors);
 //  -------------------
     return OK;
 }
 
-int check_mode(const char mode[])
+int check_mode(FILE *fin, const char mode[], list **factors)
 {
     if (strcmp(mode, "out") == 0)
-        return out_func();
+        return out_func(fin, factors);
     else if (strcmp(mode, "mul") == 0)
-        return mul_func();
+        return mul_func(fin, factors);
     else if (strcmp(mode, "div") == 0)
-        return div_func();
+        return div_func(fin, factors);
     else if (strcmp(mode, "sqr") == 0)
-        return sqr_func();
+        return sqr_func(fin, factors);
     return READ_MODE_ERR;
 }

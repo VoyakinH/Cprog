@@ -4,8 +4,7 @@
 
 int read_mode(FILE *f, char mode[])
 {
-    if (fgets(mode, 5, f) == NULL)
-        return READ_MODE_ERR;
+    fgets(mode, 5, f);
     if (mode[3] != '\n')
         return READ_MODE_ERR;
     mode[3] = '\0';
