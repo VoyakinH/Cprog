@@ -56,6 +56,7 @@ void combine_lists(list **factors_both, list **factors)
 {
     list *backup = *factors_both;
     list *buff = NULL;
+    list *prev_elem = NULL;
     while (*factors != NULL)
     {
         if ((*factors_both) == NULL)
@@ -78,7 +79,8 @@ void combine_lists(list **factors_both, list **factors)
             (*factors) = (*factors)->next_factor;
             buff->next_factor = (*factors_both);
             (*factors_both) = buff;
-            backup = (*factors_both);
+            prev_elem->next_factor = *factors_both;
+            //backup = (*factors_both);
         }
         else if ((*factors_both)->next_factor == NULL)
         {
@@ -88,6 +90,7 @@ void combine_lists(list **factors_both, list **factors)
         }
         else if ((*factors)->factor < (*factors_both)->factor)
         {
+            prev_elem = *factors_both;
             (*factors_both) = (*factors_both)->next_factor;
         }
     }
