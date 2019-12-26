@@ -110,7 +110,7 @@ static int output_list_work_corr()
     output_list(f, factors);
     rewind(f);
     int x, y;
-    if (fscanf(f, "%d%d", &x, &y) == 2 && x == factors->factor && y == factors->pow)
+    if (fscanf(f, "%d%d", &x, &y) == 2 && x == 5 && y == 5)
         count++;
     int res = 0;
     fclose(f);
@@ -142,8 +142,7 @@ static int int_to_list_work_corr()
         if (int_to_list(f, &factors) == expected[i])
             count++;
         fclose(f);
-        if (factors != NULL)
-            free_list(&factors);
+        free_list(&factors);
     }
     int res = 0;
     printf("int_to_list: ");
@@ -166,6 +165,7 @@ static int double_every_pow_work_corr()
     double_every_pow(factors);
     if (factors->factor == 5 && factors->pow == 10)
         count++;
+    free_list(&factors);
     printf("double_every_pow: ");
     if (count == 1)
         printf("OK\n");
@@ -211,8 +211,7 @@ static int check_mode_work_corr()
         if (check_mode(f, "out", &factors) == expected[i])
             count++;
         fclose(f);
-        if (factors != NULL)
-            free_list(&factors);
+        free_list(&factors);
     }
     // mul test
     for (i = 2; i <= 7; i++)
@@ -224,11 +223,10 @@ static int check_mode_work_corr()
         if (check_mode(f, "mul", &factors) == expected[i])
             count++;
         fclose(f);
-        if (factors != NULL)
-            free_list(&factors);
+        free_list(&factors);
     }
     // div test
-    for (i = 8; i <= 12; i++)
+    for (i = 8; i <= 11; i++)
     {
         FILE *f = fopen("buff.txt", "w+");
         fprintf(f, "%s", input[i]);
@@ -237,11 +235,10 @@ static int check_mode_work_corr()
         if (check_mode(f, "div", &factors) == expected[i])
             count++;
         fclose(f);
-        if (factors != NULL)
-            free_list(&factors);
+        free_list(&factors);
     }
     // sqr test
-    for (i = 13; i <= 14; i++)
+    for (i = 12; i <= 13; i++)
     {
         FILE *f = fopen("buff.txt", "w+");
         fprintf(f, "%s", input[i]);
@@ -250,16 +247,22 @@ static int check_mode_work_corr()
         if (check_mode(f, "sqr", &factors) == expected[i])
             count++;
         fclose(f);
-        if (factors != NULL)
-            free_list(&factors);
+        free_list(&factors);
     }
+
+    FILE *f = fopen("buff.txt", "w+");
+    list *factors = NULL;
+    if (check_mode(f, "err", &factors) == READ_MODE_ERR)
+        count++;
+    free_list(&factors);
+    fclose(f);
 
     int res = 0;
     printf("check_mode + all_funcs: ");
-    if (count == 14)
+    if (count == 15)
         printf("OK\n");
-    printf("Tests passed %d of 14\n\n", count);
-    if (count == 14)
+    printf("Tests passed %d of 15\n\n", count);
+    if (count == 15)
         res++;
     return res;
 }
