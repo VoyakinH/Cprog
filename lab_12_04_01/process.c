@@ -138,14 +138,12 @@ int div_func()
 int check_mode(const char mode[])
 {
     if (strcmp(mode, "out") == 0)
-        out_func();
+        return out_func();
     else if (strcmp(mode, "mul") == 0)
-        mul_func();
+        return mul_func();
     else if (strcmp(mode, "div") == 0)
-        div_func();
+        return div_func();
     else if (strcmp(mode, "sqr") == 0)
-        sqr_func();
-    else
-        return READ_MODE_ERR;
-    return OK;
+        return sqr_func();
+    return READ_MODE_ERR;
 }
