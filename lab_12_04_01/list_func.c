@@ -29,7 +29,7 @@ int increase_list(list **factors)
 
 void free_list(list **factors)
 {
-    while ((*factors)->next_factor != NULL)
+    while ((*factors) && (*factors)->next_factor != NULL)
     {
         list *buff = *factors;
         *factors = (*factors)->next_factor;

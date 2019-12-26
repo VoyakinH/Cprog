@@ -91,7 +91,10 @@ int mul_func()
         return res;
     res = int_to_list(&factors_2);
     if (res != OK)
+    {
+        free_list(&factors_1);
         return res;
+    }
     combine_lists(&factors_1, &factors_2);
     output_list(stdout, factors_1);
 //  -------------------
