@@ -7,10 +7,13 @@
 #include "func.h"
 
 uiWindow * wndMain;
+uiMultilineEntry *e;
 
 uiBox * bxMain;
 
 uiButton * btnGo;
+uiButton * btnDel;
+uiButton * btnAverage;
 
 uiEntry * dateInput;
 uiEntry * technicianInput;
@@ -23,10 +26,106 @@ uiLabel * dataOutput;
 static exp *experiments;
 static int number_of_exp = 0;
 char error_mes[100];
+char average_data[100];
 
 static void onMsgBoxErrorClicked()
 {
     uiMsgBoxError(wndMain,"Error", error_mes);
+}
+
+static void onMsgBoxAverageClicked()
+{
+    uiMsgBox(wndMain,"Среднее значение показаний", average_data);
+}
+
+void output_arr(void)
+{
+    char out[100];
+    uiMultilineEntrySetText(e, "");
+    for (int i = 0; i < number_of_exp; i++)
+    {
+        if (experiments[i].date[0] < 10)
+        {
+            sprintf(out, "0%d.", experiments[i].date[0]);
+            uiMultilineEntryAppend(e, out);
+        }
+        else
+        {
+            sprintf(out, "%d.", experiments[i].date[0]);
+            uiMultilineEntryAppend(e, out);
+        }
+        if (experiments[i].date[1] < 10)
+        {
+            sprintf(out, "0%d.%d\n", experiments[i].date[1], experiments[i].date[2]);
+            uiMultilineEntryAppend(e, out);
+        }
+        else
+        {
+            sprintf(out, "%d.%d\n", experiments[i].date[1], experiments[i].date[2]);
+            uiMultilineEntryAppend(e, out);
+        }
+
+        sprintf(out, "%s\n", experiments[i].technician);
+        uiMultilineEntryAppend(e, out);
+
+        sprintf(out, "%f\n", experiments[i].data);
+        uiMultilineEntryAppend(e, out);
+    }
+    return;
+}
+
+static int check_date(exp experiment)
+{
+    int mounth = experiment.date[1];
+    int year = experiment.date[2];
+
+    if (year < 1993)
+        return 1;
+
+    if (mounth < 2 && year == 1993)
+        return 1;
+
+    return 0;
+}
+
+static void delete_exp(int i)
+{
+    free(experiments[i].technician);
+
+    for (int j = i; j < number_of_exp - 1; j++)
+    {
+        experiments[j] = experiments[j + 1];
+    }
+    return;
+}
+
+void make_del(uiButton * btn, void * data1)
+{
+    int i = 0;
+    while (i < number_of_exp)
+    {
+        if (check_date(experiments[i]) == 1)
+        {
+            delete_exp(i);
+            number_of_exp--;
+        }
+        else
+            i++;
+    }
+    output_arr();
+    return;
+}
+
+void count_average(uiButton * btn, void * data1)
+{
+    float s = 0;
+    for (int i = 0; i < number_of_exp; i++)
+    {
+        s += experiments[i].data;
+    }
+    s /= number_of_exp;
+    sprintf(average_data, "Результат: %f", s);
+    onMsgBoxAverageClicked();
 }
 
 int is_date_valid(const char *got_date, int date[])
@@ -138,8 +237,7 @@ void read_set_of_exp(uiButton * btn, void * data1)
         experiments = new_experiments;
         new_experiments = NULL;
     }
-
-    //uiLabelSetText(lblOutput, s);
+    output_arr();
     return;
 }
 
@@ -169,7 +267,7 @@ int main(void) {
     }
     //endrequired
 
-    wndMain = uiNewWindow("LAB_14", 300, 100, 0);
+    wndMain = uiNewWindow("LAB_14", 500, 500, 0);
     uiWindowSetMargined(wndMain, 1);
     uiWindowOnClosing(wndMain, onClosing, NULL);
     uiOnShouldQuit(onShouldQuit, wndMain);
@@ -178,17 +276,11 @@ int main(void) {
     uiBoxSetPadded(bxMain, 1);
 
     uiWindowSetChild(wndMain, uiControl(bxMain));
-
-    btnGo = uiNewButton("Добавить структуру!");
-
-    uiButtonOnClicked(btnGo, read_set_of_exp, NULL);
-
-    uiBoxAppend(bxMain, uiControl(btnGo), 0);
     
+    //поля ввода
     dateInput = uiNewEntry();
     technicianInput = uiNewEntry();
     dataInput = uiNewEntry();
-    
     dateOutput = uiNewLabel("Ввод даты");
     technicianOutput = uiNewLabel("Ввод Фамилии");
     dataOutput = uiNewLabel("Ввод измерения");
@@ -198,36 +290,26 @@ int main(void) {
     uiBoxAppend(bxMain, uiControl(technicianInput), 0);
     uiBoxAppend(bxMain, uiControl(dataOutput), 0);
     uiBoxAppend(bxMain, uiControl(dataInput), 0);
+    
+    //кнопка
+    btnGo = uiNewButton("Добавить структуру!");
+    uiButtonOnClicked(btnGo, read_set_of_exp, NULL);
+    uiBoxAppend(bxMain, uiControl(btnGo), 0);
+    
+    btnDel = uiNewButton("Удалить записи проведённые не позже 1 февраля 1993 года.");
+    uiButtonOnClicked(btnDel, make_del, NULL);
+    uiBoxAppend(bxMain, uiControl(btnDel), 0);
+    
+    btnAverage = uiNewButton("Вычислить среднее значение измерений.");
+    uiButtonOnClicked(btnAverage, count_average, NULL);
+    uiBoxAppend(bxMain, uiControl(btnAverage), 0);
+    
+    //поле вывода
+    e = uiNewMultilineEntry();
+    uiMultilineEntrySetReadOnly(e, 1);
+    uiBoxAppend(bxMain, uiControl(e), 1);
 
     experiments = malloc(sizeof(exp));
-//    make_del(experiments, &number_of_exp);
-//
-//    if (number_of_exp == 0)
-//    {
-//        free_arr(&experiments, number_of_exp);
-//        free(experiments);
-//        return READ_EXP_ERR;
-//    }
-//
-//    char key[KEY_LEN];
-//
-//    if (read_key(key, stdin) != OK || sort_arr(experiments, number_of_exp, key) != OK)
-//    {
-//        free_arr(&experiments, number_of_exp);
-//        free(experiments);
-//        return READ_KEY_ERR;
-//    }
-//
-//    FILE *f = fopen("results.txt", "w");
-//    if (!f)
-//    {
-//        free_arr(&experiments, number_of_exp);
-//        free(experiments);
-//        return FILE_OPEN_ERR;
-//    }
-//
-//    write_to_file(f, experiments, number_of_exp);
-//    free_arr(&experiments, number_of_exp);
 
     free_arr();
     free(experiments);
