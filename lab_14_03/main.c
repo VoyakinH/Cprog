@@ -5,6 +5,7 @@
 #include "ui.h"
 #include "defines.h"
 #include "func.h"
+#include "test.h"
 
 uiWindow * wndMain;
 uiMultilineEntry *e;
@@ -22,11 +23,71 @@ uiEntry * dataInput;
 uiLabel * dateOutput;
 uiLabel * technicianOutput;
 uiLabel * dataOutput;
+static uiBox *table;
+
+static uiTable *t;
+static uiTableParams p;
+static int checkStates[15];
+
+
+static uiTableModelHandler tabl;
+static uiTableModel *tabl_m;
 
 static exp *experiments;
 static int number_of_exp = 0;
+static int prev_numb = 0;
 char error_mes[100];
 char average_data[100];
+
+static int modelNumColumns(uiTableModelHandler *tabl, uiTableModel *tabl_m)
+{
+    return 3;
+}
+
+static int modelNumRows(uiTableModelHandler *tabl, uiTableModel *tabl_m)
+{
+    return number_of_exp;
+}
+
+static uiTableValueType modelColumnType(uiTableModelHandler *tabl, uiTableModel *tabl_m, int column)
+{
+    return uiTableValueTypeString;
+}
+
+static uiTableValue *modelCellValue(uiTableModelHandler *tabl, uiTableModel *tabl_mm, int row, int col)
+{
+    char buf_1[256];
+    char buf_2[256];
+    
+    switch (col) {
+        case 0:
+            if (experiments[row].date[0] < 10)
+            {
+                sprintf(buf_1, "0%d.", experiments[row].date[0]);
+            }
+            else
+            {
+                sprintf(buf_1, "%d.", experiments[row].date[0]);
+            }
+            if (experiments[row].date[1] < 10)
+            {
+                sprintf(buf_2, "0%d.%d", experiments[row].date[1], experiments[row].date[2]);
+            }
+            else
+            {
+                sprintf(buf_2, "%d.%d", experiments[row].date[1], experiments[row].date[2]);
+            }
+                strcat(buf_1, buf_2);
+            break;
+        case 1:
+            sprintf(buf_1, "%s\n", experiments[row].technician);
+            break;
+        case 2:
+            sprintf(buf_1, "%f\n", experiments[row].data);
+            break;
+        }
+        return uiNewTableValueString(buf_1);
+}
 
 static void onMsgBoxErrorClicked()
 {
@@ -38,39 +99,50 @@ static void onMsgBoxAverageClicked()
     uiMsgBox(wndMain,"Среднее значение показаний", average_data);
 }
 
+uiBox *makePage16(void)
+{
+    uiBox *page16;
+    memset(checkStates, 0, 15 * sizeof (int));
+
+    page16 = uiNewVerticalBox();
+
+    tabl.NumColumns = modelNumColumns;
+    tabl.ColumnType = modelColumnType;
+    tabl.NumRows = modelNumRows;
+    tabl.CellValue = modelCellValue;
+    tabl_m = uiNewTableModel(&tabl);
+
+    memset(&p, 0, sizeof (uiTableParams));
+    p.Model = tabl_m;
+    p.RowBackgroundColorModelColumn = 3;
+    t = uiNewTable(&p);
+    uiBoxAppend(page16, uiControl(t), 1);
+
+    uiTableAppendTextColumn(t, "Дата", 0, uiTableModelColumnNeverEditable, NULL);
+    uiTableAppendTextColumn(t, "Фамилия", 1, uiTableModelColumnNeverEditable, NULL);
+    uiTableAppendTextColumn(t, "Измерение", 2, uiTableModelColumnNeverEditable, NULL);
+
+
+    return page16;
+}
+
+static void delete_all_table()
+{
+    if (prev_numb != 0)
+        for (int i = 0; i < prev_numb; i++)
+            uiTableModelRowDeleted(tabl_m, 0);
+}
+
+static void insert_to_table()
+{
+    for (int i = 0; i < number_of_exp; i++)
+        uiTableModelRowInserted(tabl_m, i);
+}
+
 void output_arr(void)
 {
-    char out[100];
-    uiMultilineEntrySetText(e, "");
-    for (int i = 0; i < number_of_exp; i++)
-    {
-        if (experiments[i].date[0] < 10)
-        {
-            sprintf(out, "0%d.", experiments[i].date[0]);
-            uiMultilineEntryAppend(e, out);
-        }
-        else
-        {
-            sprintf(out, "%d.", experiments[i].date[0]);
-            uiMultilineEntryAppend(e, out);
-        }
-        if (experiments[i].date[1] < 10)
-        {
-            sprintf(out, "0%d.%d\n", experiments[i].date[1], experiments[i].date[2]);
-            uiMultilineEntryAppend(e, out);
-        }
-        else
-        {
-            sprintf(out, "%d.%d\n", experiments[i].date[1], experiments[i].date[2]);
-            uiMultilineEntryAppend(e, out);
-        }
-
-        sprintf(out, "%s\n", experiments[i].technician);
-        uiMultilineEntryAppend(e, out);
-
-        sprintf(out, "%f\n", experiments[i].data);
-        uiMultilineEntryAppend(e, out);
-    }
+    delete_all_table();
+    insert_to_table();
     return;
 }
 
@@ -107,12 +179,13 @@ void make_del(uiButton * btn, void * data1)
         if (check_date(experiments[i]) == 1)
         {
             delete_exp(i);
+            prev_numb = number_of_exp;
             number_of_exp--;
+            output_arr();
         }
         else
             i++;
     }
-    output_arr();
     return;
 }
 
@@ -230,6 +303,7 @@ void read_set_of_exp(uiButton * btn, void * data1)
 
     copy_to_struct(date, surname, data);
 
+    prev_numb = number_of_exp;
     number_of_exp++;
     exp *new_experiments = realloc(experiments, (number_of_exp + 1) * sizeof(exp));
     if (new_experiments)
@@ -267,6 +341,7 @@ int main(void) {
     }
     //endrequired
 
+    table = makePage16();
     wndMain = uiNewWindow("LAB_14", 500, 500, 0);
     uiWindowSetMargined(wndMain, 1);
     uiWindowOnClosing(wndMain, onClosing, NULL);
@@ -276,6 +351,7 @@ int main(void) {
     uiBoxSetPadded(bxMain, 1);
 
     uiWindowSetChild(wndMain, uiControl(bxMain));
+    uiBoxAppend(bxMain, uiControl(table), 1);
     
     //поля ввода
     dateInput = uiNewEntry();
@@ -303,11 +379,6 @@ int main(void) {
     btnAverage = uiNewButton("Вычислить среднее значение измерений.");
     uiButtonOnClicked(btnAverage, count_average, NULL);
     uiBoxAppend(bxMain, uiControl(btnAverage), 0);
-    
-    //поле вывода
-    e = uiNewMultilineEntry();
-    uiMultilineEntrySetReadOnly(e, 1);
-    uiBoxAppend(bxMain, uiControl(e), 1);
 
     experiments = malloc(sizeof(exp));
 
