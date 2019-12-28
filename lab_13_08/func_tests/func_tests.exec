@@ -1,0 +1,41 @@
+#!/bin/bash
+cd func_tests
+echo
+echo FUNC_TESTS_FOR_SPROG:
+for ((i=1; i<4; i++))
+do
+echo test/#$i:
+file_in=in_0$i.txt
+file_out=out_0$i.txt
+cd ..
+./sprog.exe < ./func_tests/$file_in > ./func_tests/test_act.txt
+cd func_tests
+diff -s test_act.txt $file_out
+done
+
+echo
+echo FUNC_TESTS_FOR_DPROG:
+for ((i=1; i<4; i++))
+do
+echo test/#$i:
+file_in=in_0$i.txt
+file_out=out_0$i.txt
+cd ..
+./dprog.exe < ./func_tests/$file_in > ./func_tests/test_act.txt
+cd func_tests
+diff -s test_act.txt $file_out
+done
+
+echo
+echo FUNC_TESTS_FOR_LPROG:
+for ((i=1; i<4; i++))
+do
+echo test/#$i:
+file_in=in_0$i.txt
+file_out=out_0$i.txt
+cd ..
+./lprog.exe < ./func_tests/$file_in > ./func_tests/test_act.txt
+cd func_tests
+diff -s test_act.txt $file_out
+done
+echo
