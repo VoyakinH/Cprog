@@ -91,7 +91,6 @@ int mul_func(FILE *fin, list **factors)
 //  -------------------
 //      EASY WAY
 //  -------------------
-//    list *factors = NULL;
 //    int val_1, val_2;
 //    if (read_int(FILE_NAME, &val_1) != OK)
 //        return READ_INT_ERR;
@@ -100,7 +99,6 @@ int mul_func(FILE *fin, list **factors)
 //    val_1 *= val_2;
 //    if (init_list(&factors) != OK || factorize(&factors, val_1) != OK)
 //        return ALLOCATION_ERR;
-//    output_list(stdout, factors);
 //  -------------------
     return OK;
 }
@@ -127,15 +125,15 @@ int div_func(FILE *fin, list **factors)
     return OK;
 }
 
-int check_mode(FILE *fin, const char mode[], list **factors)
+int check_mode(const char mode[])
 {
     if (strcmp(mode, "out") == 0)
-        return out_func(fin, factors);
+        return OUT_FUNC;
     else if (strcmp(mode, "mul") == 0)
-        return mul_func(fin, factors);
+        return MUL_FUNC;
     else if (strcmp(mode, "div") == 0)
-        return div_func(fin, factors);
+        return DIV_FUNC;
     else if (strcmp(mode, "sqr") == 0)
-        return sqr_func(fin, factors);
+        return SQR_FUNC;
     return READ_MODE_ERR;
 }

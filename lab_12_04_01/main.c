@@ -9,9 +9,28 @@ int main()
     list *factors;
     if (read_mode(stdin, mode) != OK)
         return READ_MODE_ERR;
-    int err = check_mode(stdin, mode, &factors);
-    if (err != OK)
-        return err;
-    output_list(stdout, factors);
-    return OK;
+
+    int mode_int = check_mode(mode);
+    int result = OK;
+    switch (mode_int)
+    {
+        case OUT_FUNC:
+            result = out_func(stdin, &factors);
+            break;
+        case MUL_FUNC:
+            result = mul_func(stdin, &factors);
+            break;
+        case DIV_FUNC:
+            result = div_func(stdin, &factors);
+            break;
+        case SQR_FUNC:
+            result = sqr_func(stdin, &factors);
+            break;
+        default:
+            return READ_MODE_ERR;
+    }
+
+    if (result == OK)
+        output_list(stdout, factors);
+    return result;
 }

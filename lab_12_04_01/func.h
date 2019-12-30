@@ -9,7 +9,7 @@ typedef struct list
 } list;
 
 int read_mode(FILE *f, char mode[]);
-int check_mode(FILE *fin, const char mode[], list **factors);
+int check_mode(const char mode[]);
 int read_int(FILE *f, int *val);
 int init_list(list **factors);
 int increase_list(list **factors);
@@ -21,6 +21,7 @@ void double_every_pow(list *factors);
 int out_func(FILE *fin, list **factors);
 int sqr_func(FILE *fin, list **factors);
 int mul_func(FILE *fin, list **factors);
+int div_func(FILE *fin, list **factors);
 void combine_lists(list **factors_both, list **factors);
 
 #endif

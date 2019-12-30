@@ -178,91 +178,170 @@ static int double_every_pow_work_corr()
 static int check_mode_work_corr()
 {
     int i;
-    char input[14][10];
-    // out test
-    strcpy(input[0], "1\n");
-    strcpy(input[1], "0\n");
-    // mul test
-    strcpy(input[2], "0 0\n");
-    strcpy(input[3], "1 0\n");
-    strcpy(input[4], "1 2\n");
-    strcpy(input[5], "2 2\n");
-    strcpy(input[6], "5 3\n");
-    strcpy(input[7], "10 3\n");
-    // div test
-    strcpy(input[8], "0\n");
-    strcpy(input[9], "1 0\n");
-    strcpy(input[10], "2 3\n");
-    strcpy(input[11], "2 2\n");
-    // sqr test
-    strcpy(input[12], "0\n");
-    strcpy(input[13], "10\n");
+    char input[8][10];
 
-    int expected[14] = { OK, READ_INT_ERR, READ_INT_ERR, READ_INT_ERR, OK, OK, OK, OK, READ_INT_ERR, READ_INT_ERR, READ_INT_ERR, OK, READ_INT_ERR, OK };
+    strcpy(input[0], "out");
+    strcpy(input[1], "mul");
+    strcpy(input[2], "div");
+    strcpy(input[3], "sqr");
+    strcpy(input[4], "err");
+    strcpy(input[5], "er");
+    strcpy(input[6], "err1");
+    strcpy(input[7], "12");
+
+    int expected[8] = { OUT_FUNC, MUL_FUNC, DIV_FUNC, SQR_FUNC, READ_MODE_ERR, READ_MODE_ERR, READ_MODE_ERR, READ_MODE_ERR };
     int count = 0;
 
-    // out test
+    for (i = 0; i <= 7; i++)
+    {
+        if (check_mode(input[i]) == expected[i])
+            count++;
+    }
+
+    int res = 0;
+    printf("check_mode: ");
+    if (count == 8)
+        printf("OK\n");
+    printf("Tests passed %d of 8\n\n", count);
+    if (count == 8)
+        res++;
+    return res;
+}
+
+static int out_func_work_corr()
+{
+    int i;
+    char input[2][10];
+
+    strcpy(input[0], "1\n");
+    strcpy(input[1], "0\n");
+
+    int expected[2] = { OK, READ_INT_ERR };
+    int count = 0;
+
     for (i = 0; i <= 1; i++)
     {
         FILE *f = fopen("buff.txt", "w+");
         fprintf(f, "%s", input[i]);
         list *factors = NULL;
         rewind(f);
-        if (check_mode(f, "out", &factors) == expected[i])
+        if (out_func(f, &factors) == expected[i])
             count++;
         fclose(f);
         free_list(&factors);
     }
-    // mul test
-    for (i = 2; i <= 7; i++)
-    {
-        FILE *f = fopen("buff.txt", "w+");
-        fprintf(f, "%s", input[i]);
-        list *factors = NULL;
-        rewind(f);
-        if (check_mode(f, "mul", &factors) == expected[i])
-            count++;
-        fclose(f);
-        free_list(&factors);
-    }
-    // div test
-    for (i = 8; i <= 11; i++)
-    {
-        FILE *f = fopen("buff.txt", "w+");
-        fprintf(f, "%s", input[i]);
-        list *factors = NULL;
-        rewind(f);
-        if (check_mode(f, "div", &factors) == expected[i])
-            count++;
-        fclose(f);
-        free_list(&factors);
-    }
-    // sqr test
-    for (i = 12; i <= 13; i++)
-    {
-        FILE *f = fopen("buff.txt", "w+");
-        fprintf(f, "%s", input[i]);
-        list *factors = NULL;
-        rewind(f);
-        if (check_mode(f, "sqr", &factors) == expected[i])
-            count++;
-        fclose(f);
-        free_list(&factors);
-    }
-
-    FILE *f = fopen("buff.txt", "w+");
-    list *factors = NULL;
-    if (check_mode(f, "err", &factors) == READ_MODE_ERR)
-        count++;
-    free_list(&factors);
-    fclose(f);
 
     int res = 0;
-    printf("check_mode + all_funcs: ");
-    if (count == 15)
+    printf("out_func: ");
+    if (count == 2)
         printf("OK\n");
-    printf("Tests passed %d of 15\n\n", count);
-    if (count == 15)
+    printf("Tests passed %d of 2\n\n", count);
+    if (count == 2)
+        res++;
+    return res;
+}
+
+static int mul_func_work_corr()
+{
+    int i;
+    char input[6][10];
+
+    strcpy(input[0], "0 0\n");
+    strcpy(input[1], "1 0\n");
+    strcpy(input[2], "1 2\n");
+    strcpy(input[3], "2 2\n");
+    strcpy(input[4], "5 3\n");
+    strcpy(input[5], "10 3\n");
+
+    int expected[6] = { READ_INT_ERR, READ_INT_ERR, OK, OK, OK, OK };
+    int count = 0;
+
+    for (i = 0; i <= 5; i++)
+    {
+        FILE *f = fopen("buff.txt", "w+");
+        fprintf(f, "%s", input[i]);
+        list *factors = NULL;
+        rewind(f);
+        if (mul_func(f, &factors) == expected[i])
+            count++;
+        fclose(f);
+        free_list(&factors);
+    }
+
+    int res = 0;
+    printf("mul_func: ");
+    if (count == 6)
+        printf("OK\n");
+    printf("Tests passed %d of 6\n\n", count);
+    if (count == 6)
+        res++;
+    return res;
+}
+
+static int div_func_work_corr()
+{
+    int i;
+    char input[4][10];
+
+    strcpy(input[0], "0\n");
+    strcpy(input[1], "1 0\n");
+    strcpy(input[2], "2 3\n");
+    strcpy(input[3], "2 2\n");
+
+    int expected[4] = { READ_INT_ERR, READ_INT_ERR, READ_INT_ERR, OK };
+    int count = 0;
+
+    for (i = 0; i <= 3; i++)
+    {
+        FILE *f = fopen("buff.txt", "w+");
+        fprintf(f, "%s", input[i]);
+        list *factors = NULL;
+        rewind(f);
+        if (div_func(f, &factors) == expected[i])
+            count++;
+        fclose(f);
+        free_list(&factors);
+    }
+
+    int res = 0;
+    printf("div_func: ");
+    if (count == 4)
+        printf("OK\n");
+    printf("Tests passed %d of 4\n\n", count);
+    if (count == 4)
+        res++;
+    return res;
+}
+
+static int sqr_func_work_corr()
+{
+    int i;
+    char input[2][10];
+
+    strcpy(input[0], "0\n");
+    strcpy(input[1], "10\n");
+
+    int expected[2] = { READ_INT_ERR, OK };
+    int count = 0;
+
+    for (i = 0; i <= 1; i++)
+    {
+        FILE *f = fopen("buff.txt", "w+");
+        fprintf(f, "%s", input[i]);
+        list *factors = NULL;
+        rewind(f);
+        if (sqr_func(f, &factors) == expected[i])
+            count++;
+        fclose(f);
+        free_list(&factors);
+    }
+
+    int res = 0;
+    printf("sqr_func: ");
+    if (count == 2)
+        printf("OK\n");
+    printf("Tests passed %d of 2\n\n", count);
+    if (count == 2)
         res++;
     return res;
 }
@@ -278,8 +357,12 @@ int main()
     count += int_to_list_work_corr();
     count += double_every_pow_work_corr();
     count += check_mode_work_corr();
-    
-    printf("Test functions passed %d of 8\n", count);
+    count += out_func_work_corr();
+    count += mul_func_work_corr();
+    count += div_func_work_corr();
+    count += sqr_func_work_corr();
+
+    printf("Test functions passed %d of 12\n", count);
     return 0;
 }
 
